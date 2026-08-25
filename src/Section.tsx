@@ -516,7 +516,7 @@ function ProjectSection({
   return (
     <div
       ref={ref}
-      className="px-8 md:px-12 py-16 md:py-20"
+      className="px-4 sm:px-8 md:px-12 py-14 md:py-20"
       style={{
         borderTop: '1px solid #FAFAF80f',
         opacity: visible ? 1 : 0,
