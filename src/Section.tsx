@@ -130,21 +130,6 @@ function MediaPlaceholder({
         }}
       />
 
-      {/* Label */}
-      <div className="absolute top-3 left-4">
-        <span
-          className="text-[9px] tracking-[0.22em] uppercase"
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            color: '#050505',
-            opacity: hovered ? 0.75 : 0.3,
-            transition: 'opacity 0.2s ease',
-          }}
-        >
-          {label}
-        </span>
-      </div>
-
       {/* Center icon */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none"

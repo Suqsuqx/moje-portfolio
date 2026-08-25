@@ -324,7 +324,7 @@ const REAL_ASSETS: Record<string, string[]> = {
   ],
   'editorial-illustration': [
     '/assets/art/editorial/editorial-illustration-.png',
-    ...numberedAssets('/assets/art/editorial', 'editorial-illustration-', [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]),
+    ...numberedAssets('/assets/art/editorial', 'editorial-illustration-', [4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]),
   ],
   'figures-faces': numberedAssets('/assets/art/faces', 'figures-faces-', [1, 2, 3, 4, 5]),
   'worlds-experiments': numberedAssets('/assets/art/worlds', 'worlds-experiments-', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
