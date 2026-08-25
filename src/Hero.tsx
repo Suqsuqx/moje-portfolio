@@ -22,7 +22,7 @@ function PanelBlock({
 }) {
   return (
     <div
-      className="relative overflow-hidden flex-none"
+      className="relative overflow-hidden flex-none hero-panel"
       style={{
         width: `${panel.w}%`,
         background: panel.color,
@@ -110,7 +110,7 @@ export default function Hero({
 
   return (
     <div
-      className="relative flex flex-col"
+      className="relative flex flex-col hero-root"
       style={{
         height: '100dvh',
         background: '#050505',
@@ -204,8 +204,8 @@ export default function Hero({
       </div>
 
       {/* ── Panels ──────────────────────────────────────────────── */}
-      <div className="flex flex-1 px-4 sm:px-8 md:px-12 pb-6 md:pb-10 overflow-hidden">
-        <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 px-4 sm:px-8 md:px-12 pb-6 md:pb-10 overflow-hidden hero-panels-shell">
+        <div className="flex flex-1 overflow-hidden hero-panels">
           {PANELS.map((panel, i) => (
             <PanelBlock
               key={panel.id}

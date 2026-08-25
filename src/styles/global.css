@@ -223,6 +223,26 @@ html, body, #root {
 }
 
 @media (max-width: 700px) {
+  .hero-root {
+    height: auto !important;
+    min-height: 100dvh;
+  }
+
+  .hero-panels-shell,
+  .hero-panels {
+    overflow: visible !important;
+  }
+
+  .hero-panels {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-panel {
+    width: 100% !important;
+    min-height: 132px;
+  }
+
   .hero-panel-label {
     left: 8px !important;
     right: 6px !important;
