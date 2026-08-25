@@ -93,6 +93,7 @@ export default function Hero({
   visible: boolean
 }) {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
+  const [mobileScrollIdx, setMobileScrollIdx] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -104,9 +105,39 @@ export default function Hero({
     }
   }, [visible])
 
-  const effectiveIdx = hoveredIdx !== null ? hoveredIdx : currentDisciplineIdx
+  useEffect(() => {
+    if (!visible) return
+    const updateFromScroll = () => {
+      if (!window.matchMedia('(max-width: 700px)').matches) {
+        setMobileScrollIdx(null)
+        return
+      }
+      const panels = Array.from(document.querySelectorAll<HTMLElement>('.hero-panel'))
+      const viewportTarget = window.innerHeight * 0.62
+      let closestIndex = 0
+      let closestDistance = Number.POSITIVE_INFINITY
+      panels.forEach((panel, index) => {
+        const bounds = panel.getBoundingClientRect()
+        const distance = Math.abs(bounds.top + bounds.height / 2 - viewportTarget)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = index
+        }
+      })
+      setMobileScrollIdx(closestIndex)
+    }
+    updateFromScroll()
+    window.addEventListener('scroll', updateFromScroll, { passive: true })
+    window.addEventListener('resize', updateFromScroll)
+    return () => {
+      window.removeEventListener('scroll', updateFromScroll)
+      window.removeEventListener('resize', updateFromScroll)
+    }
+  }, [visible])
+
+  const effectiveIdx = hoveredIdx ?? mobileScrollIdx ?? currentDisciplineIdx
   const ballLeft = BALL_CENTERS[effectiveIdx]
-  const activePanelColor = PANELS[currentDisciplineIdx].color
+  const activePanelColor = PANELS[effectiveIdx].color
 
   return (
     <div
@@ -148,19 +179,19 @@ export default function Hero({
             className="text-[10px] tracking-[0.3em] mb-1"
             style={{ fontFamily: "'DM Mono', monospace", color: activePanelColor + 'cc' }}
           >
-            {PANELS[currentDisciplineIdx].num} / 04
+            {PANELS[effectiveIdx].num} / 04
           </div>
           <div
             className="text-[10px] tracking-[0.2em] uppercase"
             style={{ fontFamily: "'DM Mono', monospace", color: '#FAFAF838' }}
           >
-            {PANELS[currentDisciplineIdx].label}
+            {PANELS[effectiveIdx].label}
           </div>
         </div>
       </div>
 
       {/* ── Ball rail ───────────────────────────────────────────── */}
-      <div className="flex-none px-4 sm:px-8 md:px-12">
+      <div className="flex-none px-4 sm:px-8 md:px-12 hero-ball-rail">
         <div className="relative" style={{ height: '52px' }}>
           {/* Rail line */}
           <div

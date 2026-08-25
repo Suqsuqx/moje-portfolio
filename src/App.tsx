@@ -489,7 +489,7 @@ export default function App() {
   return (
     <div
       className="relative"
-      style={{ background: '#050505', minHeight: '100dvh', overflow: 'hidden' }}
+      style={{ background: '#050505', minHeight: '100dvh', overflow: phase === 'hero' ? 'visible' : 'hidden' }}
     >
       {/* Loading screen */}
       {phase === 'loading' && (

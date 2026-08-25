@@ -694,7 +694,9 @@ export default function SectionView({
   const color = panel.color
   const projects = PROJECTS[panel.id].filter((project) => project.assets.some((asset) => asset.src))
   const [scrolled, setScrolled] = useState(false)
+  const [showGestureHint, setShowGestureHint] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
 
   useEffect(() => {
     const el = containerRef.current
@@ -710,6 +712,13 @@ export default function SectionView({
     setScrolled(false)
   }, [disciplineIdx])
 
+  useEffect(() => {
+    if (!window.matchMedia('(max-width: 700px)').matches) return
+    setShowGestureHint(true)
+    const timer = window.setTimeout(() => setShowGestureHint(false), 4200)
+    return () => window.clearTimeout(timer)
+  }, [])
+
   const scrollToContact = () => {
     const contact = containerRef.current?.querySelector<HTMLElement>('#contact')
     contact?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -720,7 +729,26 @@ export default function SectionView({
       ref={containerRef}
       className="relative"
       style={{ height: '100dvh', overflowY: 'auto', background: '#050505' }}
+      onTouchStart={(event) => {
+        const touch = event.touches[0]
+        touchStartRef.current = { x: touch.clientX, y: touch.clientY }
+      }}
+      onTouchEnd={(event) => {
+        const start = touchStartRef.current
+        const touch = event.changedTouches[0]
+        touchStartRef.current = null
+        if (!start || start.x > 42) return
+        const deltaX = touch.clientX - start.x
+        const deltaY = Math.abs(touch.clientY - start.y)
+        if (deltaX > 90 && deltaY < 70 && !transitioning) onReturn()
+      }}
     >
+      {showGestureHint && (
+        <div className="mobile-gesture-hint" role="status">
+          <span>→</span>
+          Swipe right from the edge to go back
+        </div>
+      )}
       {/* ── Sticky header ─────────────────────────────────────── */}
       <header
         className="sticky top-0 z-40 px-6 md:px-10 flex items-center justify-between"
