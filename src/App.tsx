@@ -185,6 +185,26 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
       id: 'suqi-graphic', title: 'SUQI', subtitle: 'Brand and campaign explorations.',
       description: 'A collection of campaign layouts and brand compositions for Suqi.', role: 'Brand / Graphic Design', year: 'Selected work', areas: 'Brand / Campaign / Social', assets: [],
     },
+    {
+      id: 'book-covers',
+      title: 'BOOK COVERS',
+      subtitle: 'Cover studies across fiction, poetry and independent publishing.',
+      description: 'A selection of book-cover concepts pairing expressive typography, illustration and image-making with the tone of each story.',
+      role: 'Art Direction / Cover Design',
+      year: 'Selected work',
+      areas: 'Publishing / Typography / Illustration',
+      assets: [],
+    },
+    {
+      id: 'fashion-illustration',
+      title: 'FASHION ILLUSTRATION',
+      subtitle: 'Silhouette, colour and character studies.',
+      description: 'A series of expressive fashion figures exploring garments through shape, movement, texture and attitude.',
+      role: 'Illustration / Art Direction',
+      year: 'Selected work',
+      areas: 'Fashion / Figure / Editorial',
+      assets: [],
+    },
   ],
   art: [
     {
@@ -322,6 +342,21 @@ const REAL_ASSETS: Record<string, string[]> = {
     '/assets/graphic/suqi/Artboard%2011-2.png',
     '/assets/graphic/suqi/Artboard%209.png',
   ],
+  'book-covers': imageAssets('/assets/graphic/bookcovers', [
+    'c.png',
+    'mu3.png',
+    '227738.png',
+    '227784.png',
+    '2277384.png',
+    '227384.png',
+    'Photo from Mò.jpg',
+  ]),
+  'fashion-illustration': imageAssets('/assets/graphic/fashion illustrations', [
+    'Fashillus-01-01.png',
+    'Fashillus2-01.png',
+    'Fashillus4-01-01.png',
+    'Fashillus4-01-02.png',
+  ]),
   'editorial-illustration': [
     '/assets/art/editorial/editorial-illustration-.png',
     ...numberedAssets('/assets/art/editorial', 'editorial-illustration-', [4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]),

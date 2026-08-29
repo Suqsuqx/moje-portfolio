@@ -385,6 +385,37 @@ function MediaGrid({
     )
   }
 
+  if (projectId === 'book-covers') {
+    return (
+      <div className="book-cover-grid">
+        {assets.map((asset, index) => (
+          <div
+            className={`book-cover-item book-cover-item--${index + 1}`}
+            key={asset.src}
+          >
+            <MediaPlaceholder {...asset} color={color} idx={index} galleryAssets={assets} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  if (projectId === 'fashion-illustration') {
+    return (
+      <div className="fashion-illustration-grid">
+        {assets.map((asset, index) => (
+          <MediaPlaceholder
+            {...asset}
+            color={color}
+            idx={index}
+            key={asset.src}
+            galleryAssets={assets}
+          />
+        ))}
+      </div>
+    )
+  }
+
   const compactColumns: Record<string, number> = {
     'editorial-illustration': 4,
     'figures-faces': 3,
@@ -625,7 +656,7 @@ function ProjectSection({
       ) : (
         <div
           className={[
-            'illustrated-tracks', 'stakeet', 'brand-systems', 'onebank', 'suqi-graphic',
+            'illustrated-tracks', 'stakeet', 'brand-systems', 'onebank', 'suqi-graphic', 'book-covers', 'fashion-illustration',
           ].includes(project.id) ? `graphic-media-bound ${project.id === 'suqi-graphic' ? 'graphic-media-bound--tight' : ''}` : undefined}
         >
           <MediaGrid assets={project.assets} color={color} layout={index} projectId={project.id} />

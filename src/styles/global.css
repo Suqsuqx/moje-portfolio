@@ -176,6 +176,24 @@ html, body, #root {
   align-items: start;
 }
 
+.book-cover-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.5rem;
+  align-items: start;
+}
+
+.book-cover-item { grid-column: span 4; }
+.book-cover-item--1,
+.book-cover-item--2 { grid-column: span 6; }
+
+.fashion-illustration-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  align-items: start;
+}
+
 .stipendly-grid {
   display: grid;
   grid-template-columns: 58fr 42fr;
@@ -315,6 +333,20 @@ html, body, #root {
 
   .stakeet-row > * {
     scroll-snap-align: start;
+  }
+
+  .book-cover-item,
+  .book-cover-item--1,
+  .book-cover-item--2 {
+    grid-column: span 6;
+  }
+
+  .book-cover-item:last-child {
+    grid-column: 4 / span 6;
+  }
+
+  .fashion-illustration-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .viewer-arrow {
