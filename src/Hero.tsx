@@ -170,10 +170,10 @@ export default function Hero({
       </div>
 
       <div className="hero-intro flex-1 flex items-end justify-between gap-8 px-4 sm:px-8 md:px-12">
-        <div className={mounted ? 'anim-fadeinup' : ''} style={{ animationDelay: '0.1s' }}>
+        <div className={`hero-statement-wrap ${mounted ? 'anim-fadeinup' : ''}`} style={{ animationDelay: '0.1s' }}>
           <h1
             key={titleIdx}
-            className={`hero-statement font-bold ${titleIdx === 1 ? 'hero-statement--alternate' : ''}`}
+            className={`hero-statement ${titleIdx === 1 ? 'hero-statement--alternate' : ''}`}
             aria-live="polite"
           >
             {HERO_TITLES[titleIdx]}
@@ -181,20 +181,31 @@ export default function Hero({
         </div>
 
         <div
-          className={`text-right ${mounted ? 'anim-fadeinup' : ''}`}
+          className={`hero-bio-column ${mounted ? 'anim-fadeinup' : ''}`}
           style={{ animationDelay: '0.25s' }}
         >
-          <div
-            className="text-[9px] tracking-[0.3em] mb-1"
-            style={{ fontFamily: "'DM Mono', monospace", color: activePanelColor + 'cc' }}
-          >
-            {PANELS[effectiveIdx].num} / 04
+          <div className="hero-bio">
+            <p>
+              I’m a product designer and builder with experience creating digital products across fintech, payments, commerce, and emerging technology. I work across product strategy, UX, systems thinking, and visual design, helping turn complex or early-stage ideas into clear, useful products that can move from concept to launch.
+            </p>
+            <p>
+              My experience spans startups, growth teams, and financial services, where I’ve worked on products from research and problem definition through design, prototyping, launch, and iteration. I’m particularly interested in ambitious products with difficult problems, where design is not just about interfaces, but about shaping how the product works, how people understand it, and how the business creates value.
+            </p>
           </div>
-          <div
-            className="text-[10px] tracking-[0.2em] uppercase"
-            style={{ fontFamily: "'DM Mono', monospace", color: '#FAFAF838' }}
-          >
-            {PANELS[effectiveIdx].label}
+
+          <div className="hero-active-discipline text-right">
+            <div
+              className="text-[9px] tracking-[0.3em] mb-1"
+              style={{ fontFamily: "'DM Mono', monospace", color: activePanelColor + 'cc' }}
+            >
+              {PANELS[effectiveIdx].num} / 04
+            </div>
+            <div
+              className="text-[10px] tracking-[0.2em] uppercase"
+              style={{ fontFamily: "'DM Mono', monospace", color: '#FAFAF838' }}
+            >
+              {PANELS[effectiveIdx].label}
+            </div>
           </div>
         </div>
       </div>
