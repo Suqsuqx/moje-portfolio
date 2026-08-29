@@ -64,7 +64,54 @@ html, body, #root {
 
 .hero-panel-label {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(14px);
+}
+
+.hero-topline {
+  height: 58px;
+  border-bottom: 1px solid rgba(250, 250, 248, 0.12);
+}
+
+.hero-intro {
+  min-height: 0;
+  padding-top: 2.5rem;
+  padding-bottom: 2rem;
+}
+
+.hero-statement {
+  max-width: 1180px;
+  margin: 0;
+  color: #fafaf8;
+  font-size: clamp(3rem, 6.5vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.065em;
+  animation: heroStatementIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-statement--alternate {
+  font-size: clamp(2.6rem, 4.7vw, 5.7rem);
+  line-height: 0.94;
+  max-width: 1320px;
+}
+
+.hero-ball-track {
+  height: 42px;
+}
+
+.hero-panels-shell {
+  flex: 0 0 clamp(190px, 27vh, 265px);
+}
+
+.hero-panel-title {
+  max-width: 12ch;
+  font-size: clamp(1.45rem, 2.75vw, 3.35rem);
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+}
+
+@keyframes heroStatementIn {
+  from { opacity: 0; transform: translateY(18px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 .media-foreground {
@@ -251,6 +298,35 @@ html, body, #root {
     overflow: visible !important;
   }
 
+  .hero-topline {
+    height: 54px;
+  }
+
+  .hero-intro {
+    flex: none;
+    min-height: 290px;
+    align-items: flex-end;
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-intro > :last-child {
+    display: none;
+  }
+
+  .hero-statement {
+    font-size: clamp(2.55rem, 12vw, 4.5rem);
+    line-height: 0.92;
+  }
+
+  .hero-statement--alternate {
+    font-size: clamp(2.15rem, 9.5vw, 3.75rem);
+  }
+
+  .hero-panels-shell {
+    flex-basis: auto;
+  }
+
   .hero-ball-rail {
     position: sticky;
     top: 0;
@@ -278,9 +354,10 @@ html, body, #root {
   }
 
   .hero-panel-title {
-    font-size: 10px;
-    line-height: 1.35;
-    letter-spacing: 0.08em;
+    max-width: none;
+    font-size: 25px;
+    line-height: 0.9;
+    letter-spacing: -0.045em;
     overflow-wrap: anywhere;
   }
 
@@ -361,6 +438,12 @@ html, body, #root {
 
   .stipendly-tile .media-foreground {
     padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-statement {
+    animation-duration: 0.01ms;
   }
 }
 

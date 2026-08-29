@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 import { PANELS, BALL_CENTERS } from './App'
 
+const HERO_TITLES = [
+  <>Product designer, artist,<br />writer&nbsp;&amp;&nbsp;builder.</>,
+  <>d!gitaL design at the inter/section<br />of art, language&nbsp;&amp;&nbsp;strategy.</>,
+]
+
 // ─── PANEL BLOCK ─────────────────────────────────────────────────────────────
 
 function PanelBlock({
@@ -52,14 +57,11 @@ function PanelBlock({
           color: panel.text,
         }}
       >
-        <div
-          className="text-[13px] tracking-[0.2em] uppercase font-semibold hero-panel-title"
-          style={{ fontFamily: "'DM Mono', monospace" }}
-        >
+        <div className="uppercase font-black hero-panel-title">
           {panel.label}
         </div>
         <div
-          className="mt-1.5 text-[10px] tracking-[0.18em] uppercase opacity-80 font-medium"
+          className="mt-2 text-[9px] tracking-[0.18em] uppercase opacity-70 font-medium"
           style={{ fontFamily: "'DM Mono', monospace" }}
         >
           SELECT →
@@ -95,6 +97,7 @@ export default function Hero({
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
   const [mobileScrollIdx, setMobileScrollIdx] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
+  const [titleIdx, setTitleIdx] = useState(0)
 
   useEffect(() => {
     if (visible) {
@@ -103,6 +106,12 @@ export default function Hero({
     } else {
       setMounted(false)
     }
+  }, [visible])
+
+  useEffect(() => {
+    if (!visible) return
+    const timer = window.setInterval(() => setTitleIdx((current) => (current + 1) % HERO_TITLES.length), 5200)
+    return () => window.clearInterval(timer)
   }, [visible])
 
   useEffect(() => {
@@ -149,25 +158,25 @@ export default function Hero({
         transition: 'opacity 0.5s ease',
       }}
     >
-      {/* ── Top: name + tagline ─────────────────────────────────── */}
-      <div
-        className="flex-none flex items-end justify-between px-4 sm:px-8 md:px-12 pb-6"
-        style={{ height: '28vh', paddingTop: '2rem' }}
-      >
-        <div style={{ animationDelay: '0.1s' }} className={mounted ? 'anim-fadeinup' : ''}>
-          <p
-            className="text-[10px] tracking-[0.3em] uppercase mb-3"
-            style={{ fontFamily: "'DM Mono', monospace", color: '#FAFAF860' }}
-          >
-            MOJE IKPEME&nbsp;&nbsp;/&nbsp;&nbsp;SELECTED WORK
-          </p>
+      {/* ── Top: name + rotating practice statement ────────────── */}
+      <div className="hero-topline flex-none flex items-center justify-between px-4 sm:px-8 md:px-12">
+        <strong className="text-sm tracking-tight">MOJE IKPEME</strong>
+        <span
+          className="text-[9px] tracking-[0.28em] uppercase"
+          style={{ fontFamily: "'DM Mono', monospace", color: '#FAFAF875' }}
+        >
+          SELECTED WORK · 2026
+        </span>
+      </div>
+
+      <div className="hero-intro flex-1 flex items-end justify-between gap-8 px-4 sm:px-8 md:px-12">
+        <div className={mounted ? 'anim-fadeinup' : ''} style={{ animationDelay: '0.1s' }}>
           <h1
-            className="text-3xl sm:text-4xl md:text-5xl font-light leading-[1.15] tracking-tight"
-            style={{ color: '#FAFAF8' }}
+            key={titleIdx}
+            className={`hero-statement font-bold ${titleIdx === 1 ? 'hero-statement--alternate' : ''}`}
+            aria-live="polite"
           >
-            Product designer,
-            <br />
-            artist, writer&nbsp;&amp;&nbsp;builder.
+            {HERO_TITLES[titleIdx]}
           </h1>
         </div>
 
@@ -176,7 +185,7 @@ export default function Hero({
           style={{ animationDelay: '0.25s' }}
         >
           <div
-            className="text-[10px] tracking-[0.3em] mb-1"
+            className="text-[9px] tracking-[0.3em] mb-1"
             style={{ fontFamily: "'DM Mono', monospace", color: activePanelColor + 'cc' }}
           >
             {PANELS[effectiveIdx].num} / 04
@@ -192,7 +201,7 @@ export default function Hero({
 
       {/* ── Ball rail ───────────────────────────────────────────── */}
       <div className="flex-none px-4 sm:px-8 md:px-12 hero-ball-rail">
-        <div className="relative" style={{ height: '52px' }}>
+        <div className="relative hero-ball-track">
           {/* Rail line */}
           <div
             className="absolute left-0 right-0"
@@ -235,7 +244,7 @@ export default function Hero({
       </div>
 
       {/* ── Panels ──────────────────────────────────────────────── */}
-      <div className="flex flex-1 px-4 sm:px-8 md:px-12 pb-6 md:pb-10 overflow-hidden hero-panels-shell">
+      <div className="flex px-4 sm:px-8 md:px-12 pb-5 md:pb-7 overflow-hidden hero-panels-shell">
         <div className="flex flex-1 overflow-hidden hero-panels">
           {PANELS.map((panel, i) => (
             <PanelBlock
