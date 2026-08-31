@@ -323,10 +323,10 @@ function MediaGrid({
 
   if (projectId === 'halo') {
     return (
-      <div className="halo-grid">
+      <div className="halo-home-grid">
         {assets.map((asset, index) => (
           <div
-            className={index === 0 ? 'halo-lead' : undefined}
+            className={`halo-home-tile halo-home-tile-${index + 1}`}
             key={`${asset.src ?? asset.label}-${index}`}
           >
             <MediaPlaceholder
@@ -576,28 +576,28 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
         <div className="halo-v8-nav transparent-asset"><div>{shot('oldnavbar.png', 'Earlier Halo navigation')}{shot('newnavbar.png', 'Redesigned Halo navigation')}</div><p><strong>One visible IA decision:</strong> navigation moved from ambiguous icons to understandable destinations — Home, Plans, Wallet, Community and Account.</p></div>
       </section>
 
-      <section className="halo-v8-section">
-        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">03 / Prototyping the journey</div><h3>Make one path work end to end.</h3><p>Onboarding became a stress test: first contact, account creation, identity and security choices had to feel like one continuous product.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item, i) => <figure key={item.src}>{caseImage(item.src, `Halo onboarding screen ${i + 1}`)}</figure>)}</div></div>
-        <div className="halo-v8-phone-flow">{newScreens.slice(0, 5).map((item, i) => <figure key={item.src}><small>0{i + 1}</small>{caseImage(item.src, `Halo journey screen ${i + 1}`)}<b>{['Get started','Create account','PIN','Biometrics','Success'][i]}</b></figure>)}</div>
-      </section>
-
-      <section className="halo-v8-section">
-        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">04 / Financial state</div><h3>Money movement needed certainty.</h3><p>Funding was an interaction sequence with information, selection, processing and a clear resulting state.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(3, 6).map((item, i) => <figure key={item.src}>{caseImage(item.src, `Halo financial state screen ${i + 1}`)}</figure>)}</div></div>
-        <blockquote className="halo-v8-pull">In a financial product, success, failure and processing are not supporting screens. They are part of the transaction.</blockquote>
-      </section>
-
-      <section className="halo-v8-section">
-        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">05 / Design system + handoff</div><h3>Turn repeated decisions into product language.</h3><p>Recurring visual and behavioural patterns were formalised so engineering could implement rules rather than one-off frames.</p></div><figure className="halo-v8-system-asset transparent-asset">{shot('color system.png', 'Halo colour system')}</figure></div>
-        <div className="halo-v8-system-strip"><div>01<b>Flow</b></div><div>02<b>Components</b></div><div>03<b>Variants & states</b></div><div>04<b>Engineering</b></div><div>05<b>QA</b></div></div>
-        <div className="halo-v8-gallery">
-          {assets.filter((item) => /paper work|wireframes|desktop|Image-6|Image-7/.test(decodeURIComponent(item.src ?? ''))).map((item, i) => <MediaPlaceholder {...item} color="#e9e7e1" idx={i} key={item.src} galleryAssets={assets} />)}
+      <section className="halo-v8-section halo-rules-section">
+        <div className="halo-linear-heading"><div><div className="halo-v8-kicker">03 / Direction</div><h3>Five rules for the redesign.</h3></div><p>Instead of treating research as a list of findings, I translated it into principles that could repeatedly answer: does this decision move Halo in the right direction?</p></div>
+        <div className="halo-rules-grid">
+          {[
+            ['▯','Mobile first','Design the smallest primary experience first, then expand the pattern to larger screens.'],
+            ['○','Simplicity','Reduce interpretation through hierarchy, language, controlled actions and progressive disclosure.'],
+            ['↗','Continuity','Structure related tasks so one meaningful action can lead naturally into the next.'],
+            ['↻','Feedback','Make system state visible whenever money, progress or product status changes.'],
+            ['⬡','Consistency','Build reusable visual and behavioural patterns rather than designing each screen independently.'],
+          ].map(([glyph,title,copy], i) => <article key={title}><small>0{i + 1}</small><i>{glyph}</i><div><h4>{title}</h4><p>{copy}</p></div></article>)}
         </div>
       </section>
 
-      <section className="halo-v8-section">
-        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">06 / Outcome</div><h3>A stronger foundation for Halo's mobile product.</h3><p>The redesign moved the product toward clearer navigation, connected journeys, explicit state and reusable patterns.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item, i) => <figure key={item.src}>{caseImage(item.src, `Final Halo product screen ${i + 1}`)}</figure>)}</div></div>
-        <div className="halo-v8-outcome"><div><b>Mobile-first product structure, redesigned core journeys and a reusable interface language.</b></div><div><strong>4.5k+</strong><span>active investors</span></div><div><strong>200+</strong><span>businesses served</span></div><div><strong>12+</strong><span>countries reached</span></div></div>
-        <p className="halo-v8-close">Halo marks the point where my design practice moved from screens to flows, from flows to architecture, and from architecture to reusable product systems.</p>
+      <section className="halo-v8-section halo-language-section">
+        <div className="halo-linear-heading"><div><div className="halo-v8-kicker">04 / Product system</div><h3>A shared language for the product.</h3></div><p>Recurring behaviours became a shared visual and interaction system: components, variants, responsive rules and financial states could be handed off as patterns instead of isolated screens.</p></div>
+        <figure className="halo-language-asset transparent-asset">{shot('color system.png', 'Halo colour and product system')}</figure>
+        <div className="halo-language-grid">{[['01','Flow','Entry points and decision branches.'],['02','Components','Reusable patterns instead of one-offs.'],['03','Variants','Loading, validation and result states.'],['04','Implementation','Responsive and behavioural details.'],['05','QA','Hierarchy, state and system fidelity.']].map(([n,title,copy]) => <article key={n}><span>→</span><small>{n}</small><h4>{title}</h4><p>{copy}</p></article>)}</div>
+      </section>
+
+      <section className="halo-v8-section halo-moments-section">
+        <div className="halo-linear-heading"><div><div className="halo-v8-kicker">05 / End-to-end flow</div><h3>One task. Seven moments.</h3></div><p>I used a complete savings-goal contribution journey as a stress test for the product direction. Every principle had to survive the sequence, not only look good on an isolated screen.</p></div>
+        <div className="halo-moments-grid">{[['Discover','Find a relevant goal from context.'],['Understand','See amount, progress and context.'],['Contribute','Enter only what is needed.'],['Review','Verify before money moves.'],['Process','Make system work visible.'],['Confirm','State exactly what happened.'],['Reflect','Return to an updated goal state.']].map(([title,copy], i) => <article key={title}><small>0{i + 1} / {title}</small><i /><h4>{title}</h4><p>{copy}</p></article>)}</div>
       </section>
       {preview && createPortal(
         <div className="halo-case-preview" role="dialog" aria-modal="true" aria-label={`Viewing ${preview.alt}`} onClick={() => setPreview(null)}>
@@ -812,7 +812,7 @@ function ProjectSection({
           ].includes(project.id) ? `graphic-media-bound ${project.id === 'suqi-graphic' ? 'graphic-media-bound--tight' : ''}` : undefined}
         >
           <MediaGrid
-            assets={project.id === 'halo' ? project.assets.slice(0, 5) : project.assets}
+            assets={project.id === 'halo' ? project.assets.slice(0, 8) : project.assets}
             color={project.id === 'halo' ? '#e9e7e1' : color}
             layout={index}
             projectId={project.id}

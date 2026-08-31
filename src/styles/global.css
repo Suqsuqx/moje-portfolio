@@ -298,6 +298,11 @@ html, body, #root {
 .halo-lead {
   grid-column: 1 / -1;
 }
+.halo-home-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); grid-template-rows: repeat(4,minmax(0,1fr)); gap: 8px; width: 100%; max-width: 832px; aspect-ratio: 1; margin-inline: auto; }
+.halo-home-tile-1 { grid-column: 1/3; grid-row: 1/3; }.halo-home-tile-2 { grid-column: 3/5; grid-row: 1/2; }.halo-home-tile-3 { grid-column: 3/5; grid-row: 2/3; }
+.halo-home-tile-4 { grid-column: 1/2; grid-row: 3/5; }.halo-home-tile-5 { grid-column: 2/3; grid-row: 3/5; }.halo-home-tile-6 { grid-column: 3/4; grid-row: 3/4; }.halo-home-tile-7 { grid-column: 4/5; grid-row: 3/4; }.halo-home-tile-8 { grid-column: 3/5; grid-row: 4/5; }
+.halo-home-tile,.halo-home-tile .media-frame { min-height: 0; height: 100%; }
+.halo-home-tile .media-foreground { width: 100%; height: 100%; padding: 40px; object-fit: contain; }
 
 .halo-case { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba(250,250,248,.12); }
 .halo-case-modal { background: #050505; color: #fafaf8; }
@@ -409,6 +414,27 @@ html, body, #root {
 .halo-case-preview { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: clamp(24px,5vw,72px); background: rgba(5,5,5,.96); cursor: zoom-out; }
 .halo-case-preview img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 .halo-case-preview button { position: fixed; top: 22px; right: 28px; color: #fafaf8; font: 500 10px/1 'DM Mono',monospace; letter-spacing: .16em; text-transform: uppercase; }
+.halo-linear-heading { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(36px,7vw,110px); align-items: end; margin-bottom: 54px; }
+.halo-linear-heading h3 { max-width: 10ch; margin: 0; font-size: clamp(54px,7.4vw,108px); font-weight: 600; line-height: .84; letter-spacing: -.076em; }
+.halo-linear-heading > p { max-width: 580px; margin: 0 0 6px; color: #aaa; font-size: 14px; line-height: 1.72; }
+.halo-rules-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
+.halo-rules-grid article,.halo-language-grid article,.halo-moments-grid article { display: flex; min-height: 310px; flex-direction: column; padding: 18px; border: 1px solid rgba(255,255,255,.17); }
+.halo-rules-grid small,.halo-language-grid small,.halo-moments-grid small { color: #777; font: 9px 'DM Mono',monospace; text-transform: uppercase; }
+.halo-rules-grid i { margin: auto 0; color: #2fd40c; font-size: 54px; font-style: normal; }
+.halo-rules-grid h4,.halo-language-grid h4,.halo-moments-grid h4 { margin: 0 0 8px; font-size: 24px; line-height: .95; letter-spacing: -.04em; }
+.halo-rules-grid p,.halo-language-grid p,.halo-moments-grid p { margin: 0; color: #999; font-size: 12px; line-height: 1.6; }
+.halo-language-asset { margin: 0 0 8px; padding: 0; }
+.halo-language-asset .halo-case-insert { min-height: 420px; }
+.halo-language-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
+.halo-language-grid article { min-height: 190px; }
+.halo-language-grid article > span { margin-bottom: auto; color: #ff7b16; font-size: 30px; }
+.halo-language-grid small { margin-bottom: 5px; }.halo-language-grid h4 { font-size: 20px; }
+.halo-moments-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 8px; }
+.halo-moments-grid article { position: relative; min-height: 250px; }
+.halo-moments-grid article:not(:last-child):after { content: '→'; position: absolute; z-index: 2; top: 47%; right: -13px; padding: 2px; background: #050505; }
+.halo-moments-grid i { width: 48px; height: 48px; margin: auto 0; border-radius: 50%; background: #ffe812; box-shadow: 13px 13px 0 -8px #fff; }
+.halo-moments-grid article:nth-child(2) i{background:#24d7ea}.halo-moments-grid article:nth-child(3) i{background:#ff7b16}.halo-moments-grid article:nth-child(4) i{background:#ff21c6}.halo-moments-grid article:nth-child(5) i{background:#245dff}.halo-moments-grid article:nth-child(6) i{background:#2fd40c}.halo-moments-grid article:nth-child(7) i{background:#ff302a}
+.halo-moments-grid h4 { font-size: 18px; }
 .halo-case-kicker,.halo-case-label { font: 500 10px/1.2 'DM Mono',monospace; letter-spacing: .22em; text-transform: uppercase; color: #2ec9dc; }
 .halo-case-kicker { padding: 18px 0; }
 .halo-case-media { margin: 0; overflow: hidden; background: #111; }
@@ -444,6 +470,15 @@ html, body, #root {
 .halo-lessons p { margin: 0; padding: 28px; min-height: 180px; background: rgba(250,250,248,.055); font-size: 18px; line-height: 1.35; }
 
 @media (max-width: 760px) {
+  .halo-home-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(6,minmax(160px,auto)); aspect-ratio: auto; }
+  .halo-home-tile-1 { grid-column: 1/-1; grid-row: 1/3; }.halo-home-tile-2,.halo-home-tile-3,.halo-home-tile-4,.halo-home-tile-5,.halo-home-tile-6,.halo-home-tile-7,.halo-home-tile-8 { grid-column: auto; grid-row: auto; }
+  .halo-home-tile-8 { grid-column: 1/-1; }
+  .halo-linear-heading { grid-template-columns: 1fr; align-items: start; }
+  .halo-rules-grid,.halo-language-grid { grid-template-columns: 1fr; }
+  .halo-rules-grid article { min-height: 230px; }
+  .halo-moments-grid { grid-template-columns: 1fr; }
+  .halo-moments-grid article { min-height: 180px; }
+  .halo-moments-grid article:not(:last-child):after { content: '↓'; top: auto; right: 18px; bottom: -14px; }
   .halo-v8-hero,.halo-v8-title-grid,.halo-v8-body { grid-template-columns: 1fr; }
   .halo-v8-hero { min-height: auto; }
   .halo-v8-montage { grid-template-rows: 80px 70px 110px 128px; }
