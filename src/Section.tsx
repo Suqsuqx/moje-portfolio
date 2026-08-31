@@ -493,9 +493,11 @@ function MediaGrid({
 function HaloFlipTile({
   item,
   index,
+  onPreview,
 }: {
   item: { type: AssetType; label: string; src?: string; alt?: string }
   index: number
+  onPreview: (src: string, alt: string) => void
 }) {
   const [flipped, setFlipped] = useState(false)
   const words = ['research', 'shipped', 'mobile', 'flow', 'system', 'handoff']
@@ -504,7 +506,10 @@ function HaloFlipTile({
     <button
       type="button"
       className={`halo-v8-tile tile-${index + 1}${flipped ? ' is-flipped' : ''}`}
-      onClick={() => setFlipped((current) => !current)}
+      onClick={() => {
+        if (flipped && item.src) onPreview(item.src, item.alt ?? `Halo product screen ${index + 1}`)
+        else setFlipped(true)
+      }}
       aria-label={`${flipped ? 'Hide' : 'Reveal'} ${item.alt ?? `Halo image ${index + 1}`}`}
       aria-pressed={flipped}
     >
@@ -516,7 +521,7 @@ function HaloFlipTile({
         </span>
         <span className="halo-flip-face halo-flip-back">
           {item.src && <img src={item.src} alt={item.alt ?? `Halo product screen ${index + 1}`} />}
-          <small>Click to return</small>
+          <small>Click to preview</small>
         </span>
       </span>
     </button>
@@ -524,10 +529,17 @@ function HaloFlipTile({
 }
 
 function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: string; src?: string; alt?: string }> }) {
+  const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null)
   const asset = (needle: string) => assets.find((item) => decodeURIComponent(item.src ?? '').includes(needle))
+  const caseImage = (src: string | undefined, alt: string, className = '') => src ? (
+    <button type="button" className={`halo-case-insert ${className}`} onClick={() => setPreview({ src, alt })} aria-label={`Preview ${alt}`}>
+      <img src={src} alt={alt} />
+      <span>View ↗</span>
+    </button>
+  ) : null
   const shot = (needle: string, alt: string, className = '') => {
     const item = asset(needle)
-    return item?.src ? <img className={className} src={item.src} alt={alt} /> : null
+    return caseImage(item?.src, alt, className)
   }
   const newScreens = assets.filter((item) => decodeURIComponent(item.src ?? '').includes('new halo screens'))
 
@@ -541,7 +553,7 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
           <div className="halo-v8-pills"><b>Lead Product Designer / Art Director</b><span>End-to-end product design</span><span>Nigeria</span></div>
         </div>
         <div className="halo-v8-montage">
-          {newScreens.slice(0, 6).map((item, i) => <HaloFlipTile item={item} index={i} key={item.src} />)}
+          {newScreens.slice(0, 6).map((item, i) => <HaloFlipTile item={item} index={i} onPreview={(src, alt) => setPreview({ src, alt })} key={item.src} />)}
         </div>
       </section>
       <div className="halo-v8-marquee">RESEARCH · REQUIREMENTS · INFORMATION ARCHITECTURE · PROTOTYPING · DESIGN SYSTEM · HANDOFF</div>
@@ -565,12 +577,12 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
       </section>
 
       <section className="halo-v8-section">
-        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">03 / Prototyping the journey</div><h3>Make one path work end to end.</h3><p>Onboarding became a stress test: first contact, account creation, identity and security choices had to feel like one continuous product.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item, i) => <figure key={item.src}><img src={item.src} alt={`Halo onboarding screen ${i + 1}`} /></figure>)}</div></div>
-        <div className="halo-v8-phone-flow">{newScreens.slice(0, 5).map((item, i) => <figure key={item.src}><small>0{i + 1}</small><img src={item.src} alt={`Halo journey screen ${i + 1}`} /><b>{['Get started','Create account','PIN','Biometrics','Success'][i]}</b></figure>)}</div>
+        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">03 / Prototyping the journey</div><h3>Make one path work end to end.</h3><p>Onboarding became a stress test: first contact, account creation, identity and security choices had to feel like one continuous product.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item, i) => <figure key={item.src}>{caseImage(item.src, `Halo onboarding screen ${i + 1}`)}</figure>)}</div></div>
+        <div className="halo-v8-phone-flow">{newScreens.slice(0, 5).map((item, i) => <figure key={item.src}><small>0{i + 1}</small>{caseImage(item.src, `Halo journey screen ${i + 1}`)}<b>{['Get started','Create account','PIN','Biometrics','Success'][i]}</b></figure>)}</div>
       </section>
 
       <section className="halo-v8-section">
-        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">04 / Financial state</div><h3>Money movement needed certainty.</h3><p>Funding was an interaction sequence with information, selection, processing and a clear resulting state.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(3, 6).map((item) => <figure key={item.src}><img src={item.src} alt="Halo financial state screen" /></figure>)}</div></div>
+        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">04 / Financial state</div><h3>Money movement needed certainty.</h3><p>Funding was an interaction sequence with information, selection, processing and a clear resulting state.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(3, 6).map((item, i) => <figure key={item.src}>{caseImage(item.src, `Halo financial state screen ${i + 1}`)}</figure>)}</div></div>
         <blockquote className="halo-v8-pull">In a financial product, success, failure and processing are not supporting screens. They are part of the transaction.</blockquote>
       </section>
 
@@ -583,10 +595,17 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
       </section>
 
       <section className="halo-v8-section">
-        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">06 / Outcome</div><h3>A stronger foundation for Halo's mobile product.</h3><p>The redesign moved the product toward clearer navigation, connected journeys, explicit state and reusable patterns.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item) => <figure key={item.src}><img src={item.src} alt="Final Halo product screen" /></figure>)}</div></div>
+        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">06 / Outcome</div><h3>A stronger foundation for Halo's mobile product.</h3><p>The redesign moved the product toward clearer navigation, connected journeys, explicit state and reusable patterns.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item, i) => <figure key={item.src}>{caseImage(item.src, `Final Halo product screen ${i + 1}`)}</figure>)}</div></div>
         <div className="halo-v8-outcome"><div><b>Mobile-first product structure, redesigned core journeys and a reusable interface language.</b></div><div><strong>4.5k+</strong><span>active investors</span></div><div><strong>200+</strong><span>businesses served</span></div><div><strong>12+</strong><span>countries reached</span></div></div>
         <p className="halo-v8-close">Halo marks the point where my design practice moved from screens to flows, from flows to architecture, and from architecture to reusable product systems.</p>
       </section>
+      {preview && createPortal(
+        <div className="halo-case-preview" role="dialog" aria-modal="true" aria-label={`Viewing ${preview.alt}`} onClick={() => setPreview(null)}>
+          <img src={preview.src} alt={preview.alt} onClick={(event) => event.stopPropagation()} />
+          <button type="button" onClick={() => setPreview(null)}>Close ×</button>
+        </div>,
+        document.body,
+      )}
     </article>
   )
 }

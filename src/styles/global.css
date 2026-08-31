@@ -393,6 +393,22 @@ html, body, #root {
 .halo-v8-outcome > div:first-child { color: #fafaf8; background: transparent; border: 1px solid var(--hv-line); }.halo-v8-outcome > div:nth-child(2){background:#245dff;color:#fff}.halo-v8-outcome > div:nth-child(3){background:#efe7db}
 .halo-v8-outcome b { font-size: clamp(28px,3.4vw,52px); line-height: .92; }.halo-v8-outcome strong { font-size: clamp(50px,6vw,92px); line-height: .8; letter-spacing: -.07em; }.halo-v8-outcome span { font-size: 11px; }
 .halo-v8-close { max-width: 1000px; margin: 52px 0 0; padding-top: 28px; border-top: 1px solid var(--hv-line); font-size: clamp(30px,3.5vw,52px); line-height: .98; letter-spacing: -.05em; }
+.halo-case-insert { position: relative; display: block; width: 100%; min-height: 180px; padding: 40px; border: 0; background: #e9e7e1; color: #050505; cursor: zoom-in; }
+.halo-case-insert img,
+.halo-v8-mosaic figure .halo-case-insert img,
+.halo-v8-phone-flow .halo-case-insert img,
+.halo-v8-paper .halo-case-insert img { position: static; display: block; width: 100%; height: 100%; max-width: 100%; object-fit: contain; transform: none; filter: none; }
+.halo-case-insert > span { position: absolute; right: 12px; bottom: 10px; opacity: 0; font: 500 8px/1 'DM Mono',monospace; letter-spacing: .14em; text-transform: uppercase; transition: opacity .2s ease; }
+.halo-case-insert:hover > span,.halo-case-insert:focus-visible > span { opacity: .7; }
+.halo-v8-mosaic figure > .halo-case-insert,.halo-v8-phone-flow figure > .halo-case-insert { position: absolute; inset: 0; height: 100%; min-height: 0; }
+.halo-v8-phone-flow figure > .halo-case-insert { background: transparent; }
+.halo-v8-phone-flow figure > .halo-case-insert img { height: calc(100% - 44px); }
+.halo-v8-paper > .halo-case-insert { height: 100%; min-height: 380px; }
+.halo-v8-artifact > .halo-case-insert,.halo-v8-system-asset > .halo-case-insert { min-height: 360px; }
+.halo-v8-nav .halo-case-insert { min-height: 160px; }
+.halo-case-preview { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: clamp(24px,5vw,72px); background: rgba(5,5,5,.96); cursor: zoom-out; }
+.halo-case-preview img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.halo-case-preview button { position: fixed; top: 22px; right: 28px; color: #fafaf8; font: 500 10px/1 'DM Mono',monospace; letter-spacing: .16em; text-transform: uppercase; }
 .halo-case-kicker,.halo-case-label { font: 500 10px/1.2 'DM Mono',monospace; letter-spacing: .22em; text-transform: uppercase; color: #2ec9dc; }
 .halo-case-kicker { padding: 18px 0; }
 .halo-case-media { margin: 0; overflow: hidden; background: #111; }
