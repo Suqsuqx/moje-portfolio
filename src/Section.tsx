@@ -304,7 +304,19 @@ function MediaGrid({
     }
   }
 
-  const twoByTwoProjects = ['Fluna', 'Poket by GradientFi', 'suqi-product', 'Bare']
+  if (projectId === 'Poket by GradientFi') {
+    return (
+      <div className="poket-home-grid">
+        {assets.slice(0, 8).map((asset, index) => (
+          <div className={`poket-home-tile poket-home-tile-${index + 1}`} key={asset.src}>
+            <MediaPlaceholder {...asset} color="#e9e7e1" idx={index} galleryAssets={assets} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  const twoByTwoProjects = ['Fluna', 'suqi-product', 'Bare']
   if (twoByTwoProjects.includes(projectId)) {
     return (
       <div className="media-two-grid">
@@ -615,6 +627,53 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
   )
 }
 
+function PoketCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: string; src?: string; alt?: string }> }) {
+  const images = assets.filter((item) => item.type === 'image' || item.type === 'gif')
+  const videos = assets.filter((item) => item.type === 'video')
+
+  return (
+    <article className="poket-case">
+      <section className="poket-case-hero">
+        <div><div className="poket-kicker">Product design / fintech / 2021–22</div><h2>POKET<span>.</span></h2><p>Designing a familiar interface for an unfamiliar financial system — one wallet for fiat, crypto, stablecoins and cross-border money movement.</p><div className="poket-pills"><span>Lead Product Designer / Product Lead</span><span>Wallets · Payments · On/Off-ramp</span></div></div>
+        <div className="poket-hero-grid">
+          {['FIAT','CRYPTO','STABLE','PAY'].map((word, i) => <div key={word}><small>0{i + 1}</small><b>{word}</b></div>)}
+          <figure>{images[0]?.src && <img src={images[0].src} alt="Poket wallet interface" />}<b>ONE INTERACTION GRAMMAR</b></figure>
+        </div>
+      </section>
+      <div className="poket-marquee">FIAT · CRYPTO · STABLECOINS · CROSS-BORDER · ON-RAMP · OFF-RAMP · ONE WALLET</div>
+
+      <section className="poket-section">
+        <div className="poket-heading"><h3>Familiar on the surface. Frontier underneath.</h3><p>In 2021/22, banking, stablecoins and consumer crypto were still largely treated as separate product categories. Poket explored what happened when those systems began to converge.</p></div>
+        <div className="poket-split"><p>The challenge was not to make users understand new financial infrastructure. It was to make new infrastructure feel understandable.</p><div><p>Poket needed to support conventional currency wallets, crypto balances, cross-border movement and emerging on/off-ramp models without making the interface feel like infrastructure software.</p><strong>The design rule: expose the financial consequence; abstract the rail.</strong></div></div>
+        <div className="poket-phone-pair">{images.slice(1,3).map((item, i) => <MediaPlaceholder {...item} color={i ? '#24d7ea' : '#dfe7ef'} idx={i} key={item.src} galleryAssets={images} />)}</div>
+      </section>
+
+      <section className="poket-section">
+        <div className="poket-heading"><h3>The wallet became the abstraction layer.</h3><p>Instead of separate products for each kind of value, Poket organised them around familiar concepts: balance, wallet, add money, pay, swap and transaction history.</p></div>
+        <div className="poket-layers"><article><small>01 / What users see</small><h4>Wallets, balances, add, pay, swap.</h4><p>A conventional account model that feels immediately legible.</p></article><article><small>02 / What the product understands</small><h4>Asset, destination, rate, fee, settlement state.</h4><p>The information required to make the action truthful and predictable.</p></article><article><small>03 / What infrastructure executes</small><h4>Bank rails, FX, blockchain, stablecoins.</h4><p>Complexity that surfaces only when it changes the user's decision.</p></article></div>
+      </section>
+
+      <section className="poket-section">
+        <div className="poket-heading"><h3>One interaction grammar.</h3><p>The route could change, but the interaction stayed familiar enough that users did not need to relearn the product for every asset or payment rail.</p></div>
+        <div className="poket-grammar">{['Balance','Asset','Destination','Review','Execute','State'].map((label,i) => <div key={label}><small>0{i + 1}</small><b>{label}</b></div>)}</div>
+        <div className="poket-image-grid">{images.slice(3,9).map((item, i) => <MediaPlaceholder {...item} color="#e9e7e1" idx={i} key={item.src} galleryAssets={images} />)}</div>
+      </section>
+
+      <section className="poket-section">
+        <div className="poket-heading"><h3>Swap and pay as money movement.</h3><p>Entry, exit and exchange began with familiar actions rather than specialist crypto language.</p></div>
+        <div className="poket-split"><p>I treated on-ramping and off-ramping as money-movement problems, not crypto features.</p><div><p>Users needed to understand what they were sending, what the recipient would receive, the applicable rate or fee, and the resulting status.</p><p>They did not need to understand the provider, rail or settlement architecture unless it materially changed the transaction.</p></div></div>
+        <div className="poket-video-grid">{videos.map((item, i) => <div key={item.src}><div><small>{i === 0 ? 'SWAP' : 'PAY'} / INTERACTION</small><video src={item.src} controls muted loop playsInline /></div></div>)}</div>
+      </section>
+
+      <section className="poket-section">
+        <div className="poket-heading"><h3>From app to infrastructure.</h3><p>The original consumer wallet proved the interaction model. The deeper opportunity became the reusable capabilities underneath it.</p></div>
+        <div className="poket-evolution"><article><small>01 / Consumer</small><h4>POKET</h4><p>One familiar multi-asset financial experience.</p></article><article><small>02 / Platform</small><h4>WalletOS</h4><p>Wallet capabilities become reusable product infrastructure.</p></article><article><small>03 / B2B</small><h4>CentryOS</h4><p>The infrastructure becomes a product other businesses can build on.</p></article></div>
+        <p className="poket-close">The original challenge was making new financial infrastructure feel familiar. The later opportunity was making that infrastructure reusable.</p>
+      </section>
+    </article>
+  )
+}
+
 function ProjectSection({
   project,
   index,
@@ -707,7 +766,7 @@ function ProjectSection({
               Read more ↗
             </button>
           )}
-          {project.id === 'halo' && (
+          {['halo', 'Poket by GradientFi'].includes(project.id) && (
             <button
               type="button"
               onClick={() => setCaseStudyOpen(true)}
@@ -776,19 +835,19 @@ function ProjectSection({
         document.body,
       )}
 
-      {caseStudyOpen && project.id === 'halo' && createPortal(
+      {caseStudyOpen && ['halo', 'Poket by GradientFi'].includes(project.id) && createPortal(
         <div
           className="fixed inset-0 z-[9999] overflow-y-auto halo-case-modal"
           role="dialog"
           aria-modal="true"
-          aria-label="Halo product case study"
+          aria-label={`${project.title} product case study`}
         >
           <div className="halo-case-modal-bar">
-            <span>MOJE IKPEME / HALO</span>
+            <span>MOJE IKPEME / {project.id === 'halo' ? 'HALO' : 'POKET'}</span>
             <button type="button" onClick={() => setCaseStudyOpen(false)}>Close ×</button>
           </div>
           <div className="halo-case-modal-inner">
-            <HaloCaseStudy assets={project.assets} />
+            {project.id === 'halo' ? <HaloCaseStudy assets={project.assets} /> : <PoketCaseStudy assets={project.assets} />}
           </div>
         </div>,
         document.body,
