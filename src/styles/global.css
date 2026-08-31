@@ -300,6 +300,10 @@ html, body, #root {
 }
 
 .halo-case { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba(250,250,248,.12); }
+.halo-case-modal { background: #050505; color: #fafaf8; }
+.halo-case-modal-bar { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; min-height: 58px; padding: 0 clamp(16px,4vw,48px); border-bottom: 1px solid rgba(250,250,248,.14); background: rgba(5,5,5,.94); backdrop-filter: blur(14px); font: 500 10px/1 'DM Mono',monospace; letter-spacing: .2em; text-transform: uppercase; }
+.halo-case-modal-bar button { color: #2ec9dc; text-transform: uppercase; }
+.halo-case-modal-inner { padding: 0 clamp(16px,4vw,48px) 80px; }
 .halo-case-kicker,.halo-case-label { font: 500 10px/1.2 'DM Mono',monospace; letter-spacing: .22em; text-transform: uppercase; color: #2ec9dc; }
 .halo-case-kicker { padding: 18px 0; }
 .halo-case-media { margin: 0; overflow: hidden; background: #111; }

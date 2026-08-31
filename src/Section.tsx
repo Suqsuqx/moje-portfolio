@@ -589,6 +589,7 @@ function ProjectSection({
 }) {
   const [visible, setVisible] = useState(false)
   const [expanded, setExpanded] = useState(false)
+  const [caseStudyOpen, setCaseStudyOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -603,9 +604,12 @@ function ProjectSection({
   }, [])
 
   useEffect(() => {
-    if (!expanded) return
+    if (!expanded && !caseStudyOpen) return
     const close = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setExpanded(false)
+      if (event.key === 'Escape') {
+        setExpanded(false)
+        setCaseStudyOpen(false)
+      }
     }
     document.addEventListener('keydown', close)
     document.body.style.overflow = 'hidden'
@@ -613,7 +617,7 @@ function ProjectSection({
       document.removeEventListener('keydown', close)
       document.body.style.overflow = ''
     }
-  }, [expanded])
+  }, [expanded, caseStudyOpen])
 
   return (
     <div
@@ -662,6 +666,16 @@ function ProjectSection({
               style={{ fontFamily: "'DM Mono', monospace", color }}
             >
               Read more ↗
+            </button>
+          )}
+          {project.id === 'halo' && (
+            <button
+              type="button"
+              onClick={() => setCaseStudyOpen(true)}
+              className="inline-flex mt-5 text-[12px] tracking-[0.18em] uppercase font-semibold"
+              style={{ fontFamily: "'DM Mono', monospace", color }}
+            >
+              Case study ↗
             </button>
           )}
           {project.url && (
@@ -723,6 +737,24 @@ function ProjectSection({
         document.body,
       )}
 
+      {caseStudyOpen && project.id === 'halo' && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] overflow-y-auto halo-case-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Halo product case study"
+        >
+          <div className="halo-case-modal-bar">
+            <span>MOJE IKPEME / HALO</span>
+            <button type="button" onClick={() => setCaseStudyOpen(false)}>Close ×</button>
+          </div>
+          <div className="halo-case-modal-inner">
+            <HaloCaseStudy assets={project.assets} />
+          </div>
+        </div>,
+        document.body,
+      )}
+
       {/* Media grid */}
       {project.role === 'Fiction' && project.url && project.assets[0]?.src ? (
         <a
@@ -745,9 +777,7 @@ function ProjectSection({
             'illustrated-tracks', 'stakeet', 'brand-systems', 'onebank', 'suqi-graphic', 'book-covers', 'fashion-illustration',
           ].includes(project.id) ? `graphic-media-bound ${project.id === 'suqi-graphic' ? 'graphic-media-bound--tight' : ''}` : undefined}
         >
-          {project.id === 'halo'
-            ? <HaloCaseStudy assets={project.assets} />
-            : <MediaGrid assets={project.assets} color={color} layout={index} projectId={project.id} />}
+          <MediaGrid assets={project.id === 'halo' ? project.assets.slice(0, 7) : project.assets} color={color} layout={index} projectId={project.id} />
         </div>
       )}
 
