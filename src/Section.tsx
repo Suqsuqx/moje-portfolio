@@ -493,35 +493,31 @@ function MediaGrid({
 function HaloFlipTile({
   item,
   index,
+  flipped,
+  onActivate,
   onPreview,
 }: {
   item: { type: AssetType; label: string; src?: string; alt?: string }
   index: number
+  flipped: boolean
+  onActivate: () => void
   onPreview: (src: string, alt: string) => void
 }) {
-  const [flipped, setFlipped] = useState(false)
-  const words = ['research', 'shipped', 'mobile', 'flow', 'system', 'handoff']
-
   return (
     <button
       type="button"
       className={`halo-v8-tile tile-${index + 1}${flipped ? ' is-flipped' : ''}`}
       onClick={() => {
         if (flipped && item.src) onPreview(item.src, item.alt ?? `Halo product screen ${index + 1}`)
-        else setFlipped(true)
+        else onActivate()
       }}
       aria-label={`${flipped ? 'Hide' : 'Reveal'} ${item.alt ?? `Halo image ${index + 1}`}`}
       aria-pressed={flipped}
     >
       <span className="halo-flip-inner">
-        <span className="halo-flip-face halo-flip-front">
-          <small>0{index + 1} / click to reveal</small>
-          <strong>{words[index]}</strong>
-          <i />
-        </span>
+        <span className="halo-flip-face halo-flip-front" />
         <span className="halo-flip-face halo-flip-back">
           {item.src && <img src={item.src} alt={item.alt ?? `Halo product screen ${index + 1}`} />}
-          <small>Click to preview</small>
         </span>
       </span>
     </button>
@@ -530,6 +526,7 @@ function HaloFlipTile({
 
 function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: string; src?: string; alt?: string }> }) {
   const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null)
+  const [activeFlip, setActiveFlip] = useState(-1)
   const asset = (needle: string) => assets.find((item) => decodeURIComponent(item.src ?? '').includes(needle))
   const caseImage = (src: string | undefined, alt: string, className = '') => src ? (
     <button type="button" className={`halo-case-insert ${className}`} onClick={() => setPreview({ src, alt })} aria-label={`Preview ${alt}`}>
@@ -543,6 +540,14 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
   }
   const newScreens = assets.filter((item) => decodeURIComponent(item.src ?? '').includes('new halo screens'))
 
+  useEffect(() => {
+    if (preview || newScreens.length === 0) return
+    const timer = window.setInterval(() => {
+      setActiveFlip((current) => (current + 1) % Math.min(newScreens.length, 6))
+    }, 3200)
+    return () => window.clearInterval(timer)
+  }, [preview, newScreens.length])
+
   return (
     <article className="halo-v8">
       <section className="halo-v8-hero">
@@ -553,7 +558,7 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
           <div className="halo-v8-pills"><b>Lead Product Designer / Art Director</b><span>End-to-end product design</span><span>Nigeria</span></div>
         </div>
         <div className="halo-v8-montage">
-          {newScreens.slice(0, 6).map((item, i) => <HaloFlipTile item={item} index={i} onPreview={(src, alt) => setPreview({ src, alt })} key={item.src} />)}
+          {newScreens.slice(0, 6).map((item, i) => <HaloFlipTile item={item} index={i} flipped={activeFlip === i} onActivate={() => setActiveFlip(i)} onPreview={(src, alt) => setPreview({ src, alt })} key={item.src} />)}
         </div>
       </section>
       <div className="halo-v8-marquee">RESEARCH · REQUIREMENTS · INFORMATION ARCHITECTURE · PROTOTYPING · DESIGN SYSTEM · HANDOFF</div>
