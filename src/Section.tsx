@@ -490,6 +490,92 @@ function MediaGrid({
 
 // ─── PROJECT SECTION ──────────────────────────────────────────────────────────
 
+const haloSteps = [
+  ['01', 'Discover', 'Find a relevant goal from context.'],
+  ['02', 'Understand', 'See amount, progress and context.'],
+  ['03', 'Contribute', 'Enter only what is needed.'],
+  ['04', 'Review', 'Verify before money moves.'],
+  ['05', 'Process', 'Make system work visible.'],
+  ['06', 'Confirm', 'State exactly what happened.'],
+  ['07', 'Reflect', 'Return to an updated goal state.'],
+]
+
+function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: string; src?: string; alt?: string }> }) {
+  const media = (index: number, className = '') => assets[index]?.src ? (
+    <figure className={`halo-case-media ${className}`}>
+      <img src={assets[index].src} alt={assets[index].alt ?? assets[index].label} />
+    </figure>
+  ) : null
+
+  return (
+    <article className="halo-case">
+      <div className="halo-case-kicker">HALO / PRODUCT CASE STUDY</div>
+      {media(0, 'halo-case-hero-media')}
+
+      <section className="halo-case-section halo-case-intro">
+        <div className="halo-case-label">01 / Problem → direction</div>
+        <div className="halo-case-heading">
+          <h3>The problem wasn't visual.</h3>
+          <p>Halo already had an early savings and investment product. Testing showed that several of its underlying interaction assumptions did not fit the mobile experience.</p>
+        </div>
+        <p className="halo-case-lead">The redesign became a product-structure problem: mobile hierarchy, continuity and system feedback had to be reconsidered together.</p>
+        <div className="halo-case-copy">
+          <p>A desktop-style transaction table was difficult to scan on a phone, while core tasks could break out into web flows and force people to re-establish context mid-action.</p>
+          <p>The direction was clear: design mobile-first, simplify hierarchy, connect related tasks, make system state explicit and formalise repeated patterns.</p>
+        </div>
+        <blockquote>We weren't designing a mobile financial product yet. We were adapting a product to mobile.</blockquote>
+      </section>
+
+      <div className="halo-case-pair">{media(1)}{media(2)}</div>
+
+      <section className="halo-case-section">
+        <div className="halo-case-label">02 / Information architecture</div>
+        <div className="halo-case-heading">
+          <h3>From screens to relationships.</h3>
+          <p>The question changed from “what screens do we need?” to “what are the objects and tasks in this system, and how should people move between them?”</p>
+        </div>
+        <p className="halo-case-lead">A goal was not a screen. It was an object that could appear across Home, Goals, Activity, notifications and invitations.</p>
+        <div className="halo-case-copy"><p>I mapped the product around those relationships: discover a savings product, create or join a goal, contribute, see the updated state, and revisit the transaction later.</p><p>This made navigation and next actions contextual instead of screen-by-screen.</p></div>
+      </section>
+
+      <div className="halo-case-process">{media(3)}{media(4)}</div>
+
+      <section className="halo-case-section">
+        <div className="halo-case-label">03 / End-to-end flow</div>
+        <div className="halo-case-heading"><h3>One task. Seven moments.</h3><p>I used one savings-goal contribution journey to stress-test the architecture, interaction model and feedback states together.</p></div>
+        <div className="halo-flow">
+          {haloSteps.map(([num, title, copy]) => <div className="halo-flow-step" key={num}><span>{num}</span><i /><div><h4>{title}</h4><p>{copy}</p></div></div>)}
+        </div>
+        <blockquote>The contribution flow was designed as a state model — not a single happy-path screen.</blockquote>
+      </section>
+
+      <div className="halo-case-pair">{media(5)}{media(6)}</div>
+
+      <section className="halo-case-section">
+        <div className="halo-case-label">04 / System + handoff</div>
+        <div className="halo-case-heading"><h3>Make the patterns reusable.</h3><p>Recurring behaviours became a shared visual and interaction system, then a clearer engineering contract.</p></div>
+        <div className="halo-system-list">
+          {['Flow / entry points and branches', 'Components / reusable patterns', 'Variants / loading, validation and results', 'Implementation / responsive behaviour', 'QA / hierarchy, state and system fidelity'].map((item, i) => <div key={item}><span>0{i + 1}</span>{item}</div>)}
+        </div>
+      </section>
+
+      {media(7, 'halo-case-wide')}
+      <div className="halo-case-gallery">{assets.slice(8, 13).map((asset, index) => <MediaPlaceholder {...asset} color="#2EC9DC" idx={index} key={asset.src} galleryAssets={assets} />)}</div>
+
+      <section className="halo-case-section halo-case-outcome">
+        <div className="halo-case-label">05 / Outcome + reflection</div>
+        <div className="halo-case-heading"><h3>A stronger foundation for Halo's mobile product.</h3><p>The redesign moved Halo away from individually designed screens toward a coherent product system.</p></div>
+        <div className="halo-lessons">
+          <p><span>01</span>Small usability failures can expose structural problems.</p>
+          <p><span>02</span>Financial UX is mostly prioritisation and certainty.</p>
+          <p><span>03</span>Reusable patterns are product infrastructure.</p>
+        </div>
+        <blockquote>From screens to flows. From flows to architecture. From architecture to reusable product systems.</blockquote>
+      </section>
+    </article>
+  )
+}
+
 function ProjectSection({
   project,
   index,
@@ -659,7 +745,9 @@ function ProjectSection({
             'illustrated-tracks', 'stakeet', 'brand-systems', 'onebank', 'suqi-graphic', 'book-covers', 'fashion-illustration',
           ].includes(project.id) ? `graphic-media-bound ${project.id === 'suqi-graphic' ? 'graphic-media-bound--tight' : ''}` : undefined}
         >
-          <MediaGrid assets={project.assets} color={color} layout={index} projectId={project.id} />
+          {project.id === 'halo'
+            ? <HaloCaseStudy assets={project.assets} />
+            : <MediaGrid assets={project.assets} color={color} layout={index} projectId={project.id} />}
         </div>
       )}
 
