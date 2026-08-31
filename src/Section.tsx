@@ -635,10 +635,6 @@ function PoketCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: st
     <article className="poket-case">
       <section className="poket-case-hero">
         <div><div className="poket-kicker">Product design / fintech / 2021–22</div><h2>POKET<span>.</span></h2><p>Designing a familiar interface for an unfamiliar financial system — one wallet for fiat, crypto, stablecoins and cross-border money movement.</p><div className="poket-pills"><span>Lead Product Designer / Product Lead</span><span>Wallets · Payments · On/Off-ramp</span></div></div>
-        <div className="poket-hero-grid">
-          {['FIAT','CRYPTO','STABLE','PAY'].map((word, i) => <div key={word}><small>0{i + 1}</small><b>{word}</b></div>)}
-          <figure>{images[0]?.src && <img src={images[0].src} alt="Poket wallet interface" />}<b>ONE INTERACTION GRAMMAR</b></figure>
-        </div>
       </section>
       <div className="poket-marquee">FIAT · CRYPTO · STABLECOINS · CROSS-BORDER · ON-RAMP · OFF-RAMP · ONE WALLET</div>
 
