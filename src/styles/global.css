@@ -340,7 +340,7 @@ html, body, #root {
 .halo-v8-tile.tile-6 .halo-flip-front { background: #ffe812; color: #050505; }
 .halo-v8-tile.tile-1 { grid-column: 1; grid-row: 1; background: #24d7ea; }
 .halo-v8-tile.tile-2 { grid-column: 2; grid-row: 1/span 2; background: #245dff; }
-.halo-v8-tile.tile-3 { grid-column: 3; grid-row: 1; background: #ff7b16; }
+.halo-v8-tile.tile-3 { grid-column: 3; grid-row: 1/span 2; background: #ff7b16; }
 .halo-v8-tile.tile-4 { grid-column: 1; grid-row: 2/span 2; background: #2fd40c; }
 .halo-v8-tile.tile-5 { grid-column: 2/span 2; grid-row: 3; background: #ff21c6; }
 .halo-v8-tile.tile-6 { grid-column: 1/-1; grid-row: 4; background: #ffe812; }
@@ -412,7 +412,7 @@ html, body, #root {
 .halo-v8-artifact > .halo-case-insert,.halo-v8-system-asset > .halo-case-insert { min-height: 360px; }
 .halo-v8-nav .halo-case-insert { min-height: 160px; }
 .halo-case-preview { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: clamp(24px,5vw,72px); background: rgba(5,5,5,.96); cursor: zoom-out; }
-.halo-case-preview img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.halo-case-preview img,.media-viewer-image { position: static !important; display: block; width: auto !important; height: auto !important; max-width: calc(100vw - 96px) !important; max-height: calc(100vh - 96px) !important; margin: auto; padding: 0 !important; object-fit: contain !important; object-position: center !important; transform: none !important; }
 .halo-case-preview button { position: fixed; top: 22px; right: 28px; color: #fafaf8; font: 500 10px/1 'DM Mono',monospace; letter-spacing: .16em; text-transform: uppercase; }
 .halo-linear-heading { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(36px,7vw,110px); align-items: end; margin-bottom: 54px; }
 .halo-linear-heading h3 { max-width: 10ch; margin: 0; font-size: clamp(54px,7.4vw,108px); font-weight: 600; line-height: .84; letter-spacing: -.076em; }

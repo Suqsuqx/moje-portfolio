@@ -216,7 +216,7 @@ function MediaPlaceholder({
             <img
               src={viewedAsset.src}
               alt={viewedAsset.alt ?? viewedAsset.label}
-              className="max-w-full max-h-full object-contain"
+              className="media-viewer-image"
               style={{ boxShadow: '0 24px 80px rgba(0,0,0,.5)' }}
               onClick={(event) => event.stopPropagation()}
             />
