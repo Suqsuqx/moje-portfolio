@@ -316,8 +316,23 @@ html, body, #root {
 .halo-v8-pills > * { padding: 10px 14px; border: 1px solid #333; border-radius: 999px; font: 11px 'DM Mono',monospace; }
 .halo-v8-pills b { background: #fafaf8; color: #050505; }
 .halo-v8-montage { display: grid; grid-template-columns: 1fr 1.34fr .84fr; grid-template-rows: 112px 96px 152px 178px; gap: 8px; transform: rotate(-.4deg); }
-.halo-v8-tile { position: relative; overflow: hidden; background: #24d7ea; }
-.halo-v8-tile img { position: absolute; left: 50%; bottom: -25%; width: auto; max-width: none; height: 138%; transform: translateX(-50%); }
+.halo-v8-tile { position: relative; min-width: 0; padding: 0; border: 0; overflow: visible; background: transparent; text-align: left; cursor: pointer; perspective: 1100px; }
+.halo-flip-inner { position: absolute; inset: 0; display: block; transform-style: preserve-3d; transition: transform .62s cubic-bezier(.22,1,.36,1); }
+.halo-v8-tile.is-flipped .halo-flip-inner { transform: rotateY(180deg); }
+.halo-flip-face { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.halo-flip-front small,.halo-flip-back small { position: relative; z-index: 2; font: 500 8px/1.2 'DM Mono',monospace; letter-spacing: .12em; text-transform: uppercase; }
+.halo-flip-front strong { position: relative; z-index: 2; font-size: clamp(19px,2.2vw,36px); font-weight: 800; line-height: .82; letter-spacing: -.06em; }
+.halo-flip-front i { position: absolute; right: 12px; bottom: 12px; width: 12px; height: 12px; border-radius: 50%; background: currentColor; }
+.halo-flip-back { align-items: center; justify-content: center; padding: 40px; transform: rotateY(180deg); background: #e9e7e1; color: #050505; }
+.halo-flip-back img { width: 100%; height: 100%; object-fit: contain; }
+.halo-flip-back small { position: absolute; right: 10px; bottom: 9px; color: rgba(5,5,5,.58); }
+.halo-v8-tile:focus-visible { outline: 2px solid #fafaf8; outline-offset: 4px; }
+.halo-v8-tile.tile-1 .halo-flip-front { background: #24d7ea; color: #050505; }
+.halo-v8-tile.tile-2 .halo-flip-front { background: #245dff; color: #fff; }
+.halo-v8-tile.tile-3 .halo-flip-front { background: #ff7b16; color: #050505; }
+.halo-v8-tile.tile-4 .halo-flip-front { background: #2fd40c; color: #050505; }
+.halo-v8-tile.tile-5 .halo-flip-front { background: #ff21c6; color: #050505; }
+.halo-v8-tile.tile-6 .halo-flip-front { background: #ffe812; color: #050505; }
 .halo-v8-tile.tile-1 { grid-column: 1; grid-row: 1; background: #24d7ea; }
 .halo-v8-tile.tile-2 { grid-column: 2; grid-row: 1/span 2; background: #245dff; }
 .halo-v8-tile.tile-3 { grid-column: 3; grid-row: 1; background: #ff7b16; }

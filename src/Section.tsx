@@ -490,6 +490,39 @@ function MediaGrid({
 
 // ─── PROJECT SECTION ──────────────────────────────────────────────────────────
 
+function HaloFlipTile({
+  item,
+  index,
+}: {
+  item: { type: AssetType; label: string; src?: string; alt?: string }
+  index: number
+}) {
+  const [flipped, setFlipped] = useState(false)
+  const words = ['research', 'shipped', 'mobile', 'flow', 'system', 'handoff']
+
+  return (
+    <button
+      type="button"
+      className={`halo-v8-tile tile-${index + 1}${flipped ? ' is-flipped' : ''}`}
+      onClick={() => setFlipped((current) => !current)}
+      aria-label={`${flipped ? 'Hide' : 'Reveal'} ${item.alt ?? `Halo image ${index + 1}`}`}
+      aria-pressed={flipped}
+    >
+      <span className="halo-flip-inner">
+        <span className="halo-flip-face halo-flip-front">
+          <small>0{index + 1} / click to reveal</small>
+          <strong>{words[index]}</strong>
+          <i />
+        </span>
+        <span className="halo-flip-face halo-flip-back">
+          {item.src && <img src={item.src} alt={item.alt ?? `Halo product screen ${index + 1}`} />}
+          <small>Click to return</small>
+        </span>
+      </span>
+    </button>
+  )
+}
+
 function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: string; src?: string; alt?: string }> }) {
   const asset = (needle: string) => assets.find((item) => decodeURIComponent(item.src ?? '').includes(needle))
   const shot = (needle: string, alt: string, className = '') => {
@@ -508,7 +541,7 @@ function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: str
           <div className="halo-v8-pills"><b>Lead Product Designer / Art Director</b><span>End-to-end product design</span><span>Nigeria</span></div>
         </div>
         <div className="halo-v8-montage">
-          {newScreens.slice(0, 6).map((item, i) => <div className={`halo-v8-tile tile-${i + 1}`} key={item.src}><img src={item.src} alt={`Halo mobile product screen ${i + 1}`} /></div>)}
+          {newScreens.slice(0, 6).map((item, i) => <HaloFlipTile item={item} index={i} key={item.src} />)}
         </div>
       </section>
       <div className="halo-v8-marquee">RESEARCH · REQUIREMENTS · INFORMATION ARCHITECTURE · PROTOTYPING · DESIGN SYSTEM · HANDOFF</div>
