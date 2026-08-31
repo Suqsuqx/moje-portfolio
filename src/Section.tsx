@@ -490,87 +490,69 @@ function MediaGrid({
 
 // ─── PROJECT SECTION ──────────────────────────────────────────────────────────
 
-const haloSteps = [
-  ['01', 'Discover', 'Find a relevant goal from context.'],
-  ['02', 'Understand', 'See amount, progress and context.'],
-  ['03', 'Contribute', 'Enter only what is needed.'],
-  ['04', 'Review', 'Verify before money moves.'],
-  ['05', 'Process', 'Make system work visible.'],
-  ['06', 'Confirm', 'State exactly what happened.'],
-  ['07', 'Reflect', 'Return to an updated goal state.'],
-]
-
 function HaloCaseStudy({ assets }: { assets: Array<{ type: AssetType; label: string; src?: string; alt?: string }> }) {
-  const media = (index: number, className = '') => assets[index]?.src ? (
-    <figure className={`halo-case-media ${className}`}>
-      <img src={assets[index].src} alt={assets[index].alt ?? assets[index].label} />
-    </figure>
-  ) : null
+  const asset = (needle: string) => assets.find((item) => decodeURIComponent(item.src ?? '').includes(needle))
+  const shot = (needle: string, alt: string, className = '') => {
+    const item = asset(needle)
+    return item?.src ? <img className={className} src={item.src} alt={alt} /> : null
+  }
+  const newScreens = assets.filter((item) => decodeURIComponent(item.src ?? '').includes('new halo screens'))
 
   return (
-    <article className="halo-case">
-      <div className="halo-case-kicker">HALO / PRODUCT CASE STUDY</div>
-      {media(0, 'halo-case-hero-media')}
-
-      <section className="halo-case-section halo-case-intro">
-        <div className="halo-case-label">01 / Problem → direction</div>
-        <div className="halo-case-heading">
-          <h3>The problem wasn't visual.</h3>
-          <p>Halo already had an early savings and investment product. Testing showed that several of its underlying interaction assumptions did not fit the mobile experience.</p>
+    <article className="halo-v8">
+      <section className="halo-v8-hero">
+        <div className="halo-v8-hero-copy">
+          <div className="halo-v8-kicker">Product design / fintech / Nigeria</div>
+          <h2>HALO<span>.</span></h2>
+          <p>Designing the foundations of a mobile-first savings and investment product — from research and requirements through information architecture, prototyping, design system and handoff.</p>
+          <div className="halo-v8-pills"><b>Lead Product Designer / Art Director</b><span>End-to-end product design</span><span>Nigeria</span></div>
         </div>
-        <p className="halo-case-lead">The redesign became a product-structure problem: mobile hierarchy, continuity and system feedback had to be reconsidered together.</p>
-        <div className="halo-case-copy">
-          <p>A desktop-style transaction table was difficult to scan on a phone, while core tasks could break out into web flows and force people to re-establish context mid-action.</p>
-          <p>The direction was clear: design mobile-first, simplify hierarchy, connect related tasks, make system state explicit and formalise repeated patterns.</p>
-        </div>
-        <blockquote>We weren't designing a mobile financial product yet. We were adapting a product to mobile.</blockquote>
-      </section>
-
-      <div className="halo-case-pair">{media(1)}{media(2)}</div>
-
-      <section className="halo-case-section">
-        <div className="halo-case-label">02 / Information architecture</div>
-        <div className="halo-case-heading">
-          <h3>From screens to relationships.</h3>
-          <p>The question changed from “what screens do we need?” to “what are the objects and tasks in this system, and how should people move between them?”</p>
-        </div>
-        <p className="halo-case-lead">A goal was not a screen. It was an object that could appear across Home, Goals, Activity, notifications and invitations.</p>
-        <div className="halo-case-copy"><p>I mapped the product around those relationships: discover a savings product, create or join a goal, contribute, see the updated state, and revisit the transaction later.</p><p>This made navigation and next actions contextual instead of screen-by-screen.</p></div>
-      </section>
-
-      <div className="halo-case-process">{media(3)}{media(4)}</div>
-
-      <section className="halo-case-section">
-        <div className="halo-case-label">03 / End-to-end flow</div>
-        <div className="halo-case-heading"><h3>One task. Seven moments.</h3><p>I used one savings-goal contribution journey to stress-test the architecture, interaction model and feedback states together.</p></div>
-        <div className="halo-flow">
-          {haloSteps.map(([num, title, copy]) => <div className="halo-flow-step" key={num}><span>{num}</span><i /><div><h4>{title}</h4><p>{copy}</p></div></div>)}
-        </div>
-        <blockquote>The contribution flow was designed as a state model — not a single happy-path screen.</blockquote>
-      </section>
-
-      <div className="halo-case-pair">{media(5)}{media(6)}</div>
-
-      <section className="halo-case-section">
-        <div className="halo-case-label">04 / System + handoff</div>
-        <div className="halo-case-heading"><h3>Make the patterns reusable.</h3><p>Recurring behaviours became a shared visual and interaction system, then a clearer engineering contract.</p></div>
-        <div className="halo-system-list">
-          {['Flow / entry points and branches', 'Components / reusable patterns', 'Variants / loading, validation and results', 'Implementation / responsive behaviour', 'QA / hierarchy, state and system fidelity'].map((item, i) => <div key={item}><span>0{i + 1}</span>{item}</div>)}
+        <div className="halo-v8-montage">
+          {newScreens.slice(0, 6).map((item, i) => <div className={`halo-v8-tile tile-${i + 1}`} key={item.src}><img src={item.src} alt={`Halo mobile product screen ${i + 1}`} /></div>)}
         </div>
       </section>
+      <div className="halo-v8-marquee">RESEARCH · REQUIREMENTS · INFORMATION ARCHITECTURE · PROTOTYPING · DESIGN SYSTEM · HANDOFF</div>
 
-      {media(7, 'halo-case-wide')}
-      <div className="halo-case-gallery">{assets.slice(8, 13).map((asset, index) => <MediaPlaceholder {...asset} color="#2EC9DC" idx={index} key={asset.src} galleryAssets={assets} />)}</div>
-
-      <section className="halo-case-section halo-case-outcome">
-        <div className="halo-case-label">05 / Outcome + reflection</div>
-        <div className="halo-case-heading"><h3>A stronger foundation for Halo's mobile product.</h3><p>The redesign moved Halo away from individually designed screens toward a coherent product system.</p></div>
-        <div className="halo-lessons">
-          <p><span>01</span>Small usability failures can expose structural problems.</p>
-          <p><span>02</span>Financial UX is mostly prioritisation and certainty.</p>
-          <p><span>03</span>Reusable patterns are product infrastructure.</p>
+      <section className="halo-v8-section">
+        <div className="halo-v8-title-grid">
+          <div><div className="halo-v8-kicker">01 / Problem → direction</div><h3>The problem wasn't visual.</h3><p>Halo already had a savings and investment product. Testing showed that interaction assumptions inherited from desktop were not translating cleanly to mobile.</p></div>
+          <div className="halo-v8-mosaic before-after"><figure>{shot('Old Home mobile', 'Earlier Halo dashboard')}<b>Earlier product</b></figure><figure>{shot('Dashbaord-1', 'Redesigned Halo dashboard')}<b>Redesigned dashboard</b></figure><div>mobile<br />first.</div></div>
         </div>
-        <blockquote>From screens to flows. From flows to architecture. From architecture to reusable product systems.</blockquote>
+        <div className="halo-v8-body"><p className="big">A transaction table that testers repeatedly struggled with became a useful signal: the mobile problem was structural, not cosmetic.</p><div><p>Dense desktop patterns were difficult to scan on smaller screens. Some important tasks also pushed users out of the main experience mid-action.</p><p>I narrowed the redesign around three priorities: <strong>mobile hierarchy, connected journeys and explicit system feedback.</strong></p><blockquote>At any point, the user should understand where they are, what happened and what they can do next.</blockquote></div></div>
+        <div className="halo-v8-decisions"><div><small>01 / Mobile first</small><b>Prioritise the smallest primary experience.</b></div><div><small>02 / Continuity</small><b>Keep related tasks connected.</b></div><div><small>03 / Feedback</small><b>Make financial state explicit.</b></div></div>
+      </section>
+
+      <section className="halo-v8-section">
+        <div className="halo-v8-title-grid">
+          <div><div className="halo-v8-kicker">02 / Information architecture</div><h3>Map the system before polishing it.</h3><p>I stopped treating Halo as a collection of screens and mapped the product around its objects, actions and states.</p></div>
+          <div className="halo-v8-paper">{shot('planning.png', 'Halo paper flow and sticky note exploration')}<strong>flow<br />before UI.</strong></div>
+        </div>
+        <figure className="halo-v8-artifact transparent-asset">{shot('halo flow.png', 'Full Halo information architecture and user-flow map')}<figcaption>Full product architecture / user-flow map</figcaption></figure>
+        <div className="halo-v8-nav transparent-asset"><div>{shot('oldnavbar.png', 'Earlier Halo navigation')}{shot('newnavbar.png', 'Redesigned Halo navigation')}</div><p><strong>One visible IA decision:</strong> navigation moved from ambiguous icons to understandable destinations — Home, Plans, Wallet, Community and Account.</p></div>
+      </section>
+
+      <section className="halo-v8-section">
+        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">03 / Prototyping the journey</div><h3>Make one path work end to end.</h3><p>Onboarding became a stress test: first contact, account creation, identity and security choices had to feel like one continuous product.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item, i) => <figure key={item.src}><img src={item.src} alt={`Halo onboarding screen ${i + 1}`} /></figure>)}</div></div>
+        <div className="halo-v8-phone-flow">{newScreens.slice(0, 5).map((item, i) => <figure key={item.src}><small>0{i + 1}</small><img src={item.src} alt={`Halo journey screen ${i + 1}`} /><b>{['Get started','Create account','PIN','Biometrics','Success'][i]}</b></figure>)}</div>
+      </section>
+
+      <section className="halo-v8-section">
+        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">04 / Financial state</div><h3>Money movement needed certainty.</h3><p>Funding was an interaction sequence with information, selection, processing and a clear resulting state.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(3, 6).map((item) => <figure key={item.src}><img src={item.src} alt="Halo financial state screen" /></figure>)}</div></div>
+        <blockquote className="halo-v8-pull">In a financial product, success, failure and processing are not supporting screens. They are part of the transaction.</blockquote>
+      </section>
+
+      <section className="halo-v8-section">
+        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">05 / Design system + handoff</div><h3>Turn repeated decisions into product language.</h3><p>Recurring visual and behavioural patterns were formalised so engineering could implement rules rather than one-off frames.</p></div><figure className="halo-v8-system-asset transparent-asset">{shot('color system.png', 'Halo colour system')}</figure></div>
+        <div className="halo-v8-system-strip"><div>01<b>Flow</b></div><div>02<b>Components</b></div><div>03<b>Variants & states</b></div><div>04<b>Engineering</b></div><div>05<b>QA</b></div></div>
+        <div className="halo-v8-gallery">
+          {assets.filter((item) => /paper work|wireframes|desktop|Image-6|Image-7/.test(decodeURIComponent(item.src ?? ''))).map((item, i) => <MediaPlaceholder {...item} color="#e9e7e1" idx={i} key={item.src} galleryAssets={assets} />)}
+        </div>
+      </section>
+
+      <section className="halo-v8-section">
+        <div className="halo-v8-title-grid"><div><div className="halo-v8-kicker">06 / Outcome</div><h3>A stronger foundation for Halo's mobile product.</h3><p>The redesign moved the product toward clearer navigation, connected journeys, explicit state and reusable patterns.</p></div><div className="halo-v8-mosaic phone-mosaic">{newScreens.slice(0, 3).map((item) => <figure key={item.src}><img src={item.src} alt="Final Halo product screen" /></figure>)}</div></div>
+        <div className="halo-v8-outcome"><div><b>Mobile-first product structure, redesigned core journeys and a reusable interface language.</b></div><div><strong>4.5k+</strong><span>active investors</span></div><div><strong>200+</strong><span>businesses served</span></div><div><strong>12+</strong><span>countries reached</span></div></div>
+        <p className="halo-v8-close">Halo marks the point where my design practice moved from screens to flows, from flows to architecture, and from architecture to reusable product systems.</p>
       </section>
     </article>
   )
@@ -777,7 +759,12 @@ function ProjectSection({
             'illustrated-tracks', 'stakeet', 'brand-systems', 'onebank', 'suqi-graphic', 'book-covers', 'fashion-illustration',
           ].includes(project.id) ? `graphic-media-bound ${project.id === 'suqi-graphic' ? 'graphic-media-bound--tight' : ''}` : undefined}
         >
-          <MediaGrid assets={project.id === 'halo' ? project.assets.slice(0, 7) : project.assets} color={color} layout={index} projectId={project.id} />
+          <MediaGrid
+            assets={project.id === 'halo' ? project.assets.slice(0, 5) : project.assets}
+            color={project.id === 'halo' ? '#e9e7e1' : color}
+            layout={index}
+            projectId={project.id}
+          />
         </div>
       )}
 
