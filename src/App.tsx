@@ -51,7 +51,7 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
       subtitle: 'Helping people make money last to payday.',
       description: 'I founded and designed the product, from budget rules and payout schedules to the wallet people spend from.',
       role: 'Product / UX / Systems',
-      year: '2024–2026',
+      year: '2025–2026',
       areas: 'Fintech / Behaviour / Infrastructure',
       url: 'https://stipendly.online',
       longDescription: `Stipendly is a fintech product I founded and designed around a simple problem: income often arrives in large, irregular chunks, while expenses happen continuously. Instead of asking users to repeatedly exercise budgeting discipline, Stipendly lets them structure money into budgets that release spendable amounts as scheduled stipends.\n\nI designed the product end-to-end across onboarding, KYC, budgets, stipends, wallets, funding, withdrawals, transactions and account management, as well as the underlying rules that govern recurring funding, rollovers, payout schedules and failure recovery.\n\nThe core interaction is Budget → Stipend → Spendable destination: users decide how much money to commit, over what period, and how frequently they want access to it. Stipendly then turns budgeting from a static plan into an active cash-flow system.`,

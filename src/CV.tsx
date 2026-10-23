@@ -1,6 +1,6 @@
 const experience = [
   { company: 'Sterling Bank', role: 'Designer → Growth & Product Marketing', date: '2022–2026', copy: 'Connected visual design, product communication and growth across financial services. Created campaign and social assets that made banking products easier to understand.' },
-  { company: 'Stipendly', role: 'Founder / Product Designer & Builder', date: '2024–Present', copy: 'Designed and built a product that turns budgets into scheduled spending money. Own the experience across onboarding, identity checks, funding, payouts and wallets, including the rules and recovery states behind each journey.' },
+  { company: 'Stipendly', role: 'Founder / Product Designer & Builder', date: '2025–2026', copy: 'Designed and built a product that turns budgets into scheduled spending money. Own the experience across onboarding, identity checks, funding, payouts and wallets, including the rules and recovery states behind each journey.' },
   { company: 'Halo Capital', role: 'Lead Product Designer / Art Director', date: '2021', copy: 'Led the mobile savings and investment experience from research and information architecture to prototypes, a shared design system and engineering handoff.' },
   { company: 'Ake Arts & Book Festival', role: 'Art Director', date: '2019', copy: 'Developed the visual expression of a literary and cultural festival across its design materials.' },
 ]
