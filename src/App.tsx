@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Hero from './Hero'
 import SectionView from './Section'
+import CV from './CV'
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 
@@ -47,12 +48,12 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
     {
       id: 'stipendly',
       title: 'STIPENDLY',
-      subtitle: 'Programmable liquidity control for your finances.',
-      description: 'A fintech product for structuring irregular income into budgets that release spendable amounts as scheduled stipends.',
+      subtitle: 'Helping people make money last to payday.',
+      description: 'I founded and designed the product, from budget rules and payout schedules to the wallet people spend from.',
       role: 'Product / UX / Systems',
-      year: '2024–2026',
+      year: '2025–2026',
       areas: 'Fintech / Behaviour / Infrastructure',
-      url: 'https://stipendly.offlinebanker.com',
+      url: 'https://stipendly.online',
       longDescription: `Stipendly is a fintech product I founded and designed around a simple problem: income often arrives in large, irregular chunks, while expenses happen continuously. Instead of asking users to repeatedly exercise budgeting discipline, Stipendly lets them structure money into budgets that release spendable amounts as scheduled stipends.\n\nI designed the product end-to-end across onboarding, KYC, budgets, stipends, wallets, funding, withdrawals, transactions and account management, as well as the underlying rules that govern recurring funding, rollovers, payout schedules and failure recovery.\n\nThe core interaction is Budget → Stipend → Spendable destination: users decide how much money to commit, over what period, and how frequently they want access to it. Stipendly then turns budgeting from a static plan into an active cash-flow system.`,
       assets: [
         { type: 'image', label: 'IMAGE 01' },
@@ -64,18 +65,18 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
     {
       id: 'halo',
       title: 'HALO',
-      subtitle: 'Designing the foundations of a mobile-first savings and investment product.',
-      description: 'A case study spanning research, requirements, information architecture, prototyping, a shared product system and engineering handoff.',
+      subtitle: 'Making saving and investing work on mobile.',
+      description: 'I led the redesign from research and navigation through prototypes, a shared design system and engineering handoff.',
       role: 'Lead Product Designer / Art Director',
-      year: '2022',
+      year: '2021',
       areas: 'Fintech / Mobile / Product systems',
       assets: [],
     },
     {
       id: 'Poket by GradientFi',
       title: 'Poket by GradientFi',
-      subtitle: 'A borderless wallet for managing payments across currencies.',
-      description: 'GradientFI’s borderless wallet for managing payments across traditional currencies, stablecoins and crypto.',
+      subtitle: 'One familiar wallet for different kinds of money.',
+      description: 'I designed wallet, payment and exchange journeys across traditional currencies, stablecoins and crypto.',
       role: 'UX / Research / Systems',
       year: '2021–2022',
       areas: 'Wallets / Payments / Mobile',
@@ -84,11 +85,11 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
     {
       id: 'Fluna',
       title: 'FLUNA CAPITAL',
-      subtitle: 'Making an investment platform easier to understand, trust and operate.',
-      description: 'A redesign of Fluna Capital’s public experience and internal dashboard, grounded in user behaviour and product data.',
+      subtitle: 'A clearer path from interest to investment.',
+      description: 'I redesigned the landing page and internal dashboard around user behaviour, product data and the path to signup.',
       role: 'Product / Strategy',
       year: '2024',
-      areas: 'Education / Policy / SaaS',
+      areas: 'Investment / Web / Operations',
       longDescription: `Fluna Capital needed a clearer experience across both its public-facing product and the tools used to manage customers internally. I worked as a consulting product designer to rethink the landing page and internal dashboard, using existing user behaviour and product data to identify where communication and hierarchy were breaking down.\n\nThe redesign focused on simplifying how Fluna explained its offering, strengthening the path from interest to signup, and creating a more structured backend experience for managing platform activity.\n\nThe result was a clearer conversion architecture and a more usable internal product, with signups increasing by 20% in the first month after the redesign.`,
       assets: [
         { type: 'image', label: 'IMAGE 01' },
@@ -99,11 +100,11 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
     {
       id: 'Bare',
       title: 'Bare',
-      subtitle: 'A more useful skincare experience for people with brown and Black skin.',
-      description: 'A personalised skincare recommendation, consultant and community platform designed for brown and Black skin.',
+      subtitle: 'Skincare recommendations built around darker skin.',
+      description: 'I led research, onboarding and the skincare quiz, connecting recommendations with products, consultants and community.',
       role: 'Product / Service Design',
       year: '2025–2026',
-      areas: 'Commerce / Hospitality / Growth',
+      areas: 'Skincare / Commerce / Community',
       longDescription: `BARE was a skincare recommendation and regimen platform built around the reality that mainstream skincare tools often underserve darker skin tones. The product combined personalised recommendations with access to products, consultants and community.\n\nI led product design work across research, onboarding and the skincare quiz, then expanded the experience with community features, currency conversion, reporting tools and distinct dashboards for customers, merchants and consultants.\n\nA major focus was reducing friction in the recommendation journey. The redesigned flow brought quiz completion to under five minutes, introduced save-progress and automatic account creation, and helped increase signup and quiz completion by 30% in the first month.`,
       assets: [
         { type: 'image', label: 'IMAGE 01' },
@@ -116,8 +117,8 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
     {
       id: 'suqi-product',
       title: 'SUQIEATS',
-      subtitle: 'Designing the customer experience and operating system behind a restaurant.',
-      description: 'The customer experience and internal operating system connecting ordering, restaurant operations and community programmes.',
+      subtitle: 'Connecting the order to the operation.',
+      description: 'I designed the customer journey and staff workflows across ordering, fulfilment, memberships and restaurant operations.',
       role: 'Product / UI',
       year: 'Selected work',
       areas: 'Product / Mobile / Interaction',
@@ -129,11 +130,11 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
     {
       id: 'illustrated-tracks',
       title: 'ILLUSTRATED TRACKS',
-      subtitle: 'Album artwork for independent musicians.',
-      description: 'Album covers, lyric booklets, and visual identities for artists across afrobeats, jazz, and experimental music — making each release feel like an event.',
+      subtitle: 'Turning motorsport passion into artwork people collect.',
+      description: 'I create motorsport posters and campaign visuals, connecting illustration and art direction with the store’s marketing.',
       role: 'Art Direction / Illustration',
       year: '2023–2024',
-      areas: 'Music / Publishing / Print',
+      areas: 'Motorsport / Commerce / Print',
       assets: [
         { type: 'image', label: 'IMAGE 01' },
         { type: 'image', label: 'IMAGE 02' },
@@ -158,8 +159,8 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
     {
       id: 'brand-systems',
       title: 'SELECTED BRAND SYSTEMS',
-      subtitle: 'Visual identities across three continents.',
-      description: 'A curated selection of brand identities for ventures in Lagos, London, and Vancouver — fintech, food, and professional services.',
+      subtitle: 'Identities built to work across formats.',
+      description: 'Brand identities and campaign systems across finance, food and culture.',
       role: 'Brand Strategy / Design',
       year: '2021–2025',
       areas: 'Identity / Strategy / Systems',
@@ -205,7 +206,7 @@ export const PROJECTS: Record<DisciplineId, Project[]> = {
       id: 'editorial-illustration',
       title: 'EDITORIAL ILLUSTRATION',
       subtitle: 'Commissions on culture, economics and identity.',
-      description: 'Long-form editorial illustrations for publications covering African tech ecosystems, global health policy, and questions of digital citizenship.',
+      description: 'Illustration exploring culture, economics and identity through composition, colour and visual storytelling.',
       role: 'Illustration / Art Direction',
       year: '2022–2026',
       areas: 'Editorial / Digital / Print',
@@ -486,7 +487,19 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
 export default function App() {
-  const [phase, setPhase] = useState<Phase>('loading')
+  const [phase, setPhase] = useState<Phase>('hero')
+  const [showCV, setShowCV] = useState(() => window.location.hash === '#cv')
+
+  useEffect(() => {
+    const syncCV = () => setShowCV(window.location.hash === '#cv')
+    window.addEventListener('hashchange', syncCV)
+    return () => window.removeEventListener('hashchange', syncCV)
+  }, [])
+
+  useEffect(() => {
+    document.title = showCV ? 'Moje Ikpeme / CV' : 'Moje Ikpeme / Product Designer'
+    window.scrollTo(0, 0)
+  }, [showCV])
   const [disciplineIdx, setDisciplineIdx] = useState(0)
   const [transitioning, setTransitioning] = useState(false)
   const [overlayVisible, setOverlayVisible] = useState(false)
@@ -546,8 +559,10 @@ export default function App() {
         <LoadingScreen onComplete={() => setPhase('hero')} />
       )}
 
+      {showCV && <CV />}
+
       {/* Hero */}
-      {phase === 'hero' && (
+      {!showCV && phase === 'hero' && (
         <Hero
           currentDisciplineIdx={disciplineIdx}
           onSelect={handleDisciplineSelect}
@@ -557,7 +572,7 @@ export default function App() {
       )}
 
       {/* Section */}
-      {phase === 'section' && (
+      {!showCV && phase === 'section' && (
         <SectionView
           disciplineIdx={disciplineIdx}
           onReturn={handleReturn}
