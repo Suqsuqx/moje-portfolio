@@ -759,7 +759,7 @@ function ProjectSection({
               className="inline-flex mt-5 text-[12px] tracking-[0.18em] uppercase font-semibold"
               style={{ fontFamily: "'DM Mono', monospace", color }}
             >
-              Read more ↗
+              Design story ↗
             </button>
           )}
           {['halo', 'Poket by GradientFi'].includes(project.id) && (
@@ -927,7 +927,6 @@ export default function SectionView({
   const color = panel.color
   const projects = PROJECTS[panel.id].filter((project) => project.assets.some((asset) => asset.src))
   const [scrolled, setScrolled] = useState(false)
-  const [showGestureHint, setShowGestureHint] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const touchStartRef = useRef<{ x: number; y: number } | null>(null)
 
@@ -944,13 +943,6 @@ export default function SectionView({
     if (containerRef.current) containerRef.current.scrollTop = 0
     setScrolled(false)
   }, [disciplineIdx])
-
-  useEffect(() => {
-    if (!window.matchMedia('(max-width: 700px)').matches) return
-    setShowGestureHint(true)
-    const timer = window.setTimeout(() => setShowGestureHint(false), 4200)
-    return () => window.clearTimeout(timer)
-  }, [])
 
   const scrollToContact = () => {
     const contact = containerRef.current?.querySelector<HTMLElement>('#contact')
@@ -976,12 +968,6 @@ export default function SectionView({
         if (deltaX > 90 && deltaY < 70 && !transitioning) onReturn()
       }}
     >
-      {showGestureHint && (
-        <div className="mobile-gesture-hint" role="status">
-          <span>→</span>
-          Swipe right from the edge to go back
-        </div>
-      )}
       {/* ── Sticky header ─────────────────────────────────────── */}
       <header
         className="sticky top-0 z-40 px-6 md:px-10 flex items-center justify-between"
@@ -1040,6 +1026,7 @@ export default function SectionView({
             CONTACT
           </button>
         </nav>
+        <a href="#cv" className="portfolio-cv-link">CV ↗</a>
       </header>
 
       {/* ── Section title ─────────────────────────────────────── */}
@@ -1094,21 +1081,21 @@ export default function SectionView({
               className="text-[10px] tracking-[0.3em] uppercase mb-5"
               style={{ fontFamily: "'DM Mono', monospace", color: `${color}90` }}
             >
-              CONTACT / SAY HELLO
+              LET’S WORK TOGETHER
             </div>
             <h2
               className="text-5xl md:text-8xl font-extrabold tracking-tighter leading-[0.95]"
               style={{ color: '#FAFAF8', letterSpacing: '-0.04em' }}
             >
-              Have an interesting
+              Your next
               <br />
-              thing to make?
+              product designer.
             </h2>
           </div>
 
           <div className="md:pb-2">
             <p className="text-base md:text-lg font-light leading-relaxed mb-8" style={{ color: '#FAFAF870' }}>
-              Product systems, visual identities, illustration, writing, or something that sits awkwardly between all four.
+              I’m open to product design roles and contract work. Let’s talk about your team and what you’re building.
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-3">
               {[
@@ -1148,7 +1135,7 @@ export default function SectionView({
             className="text-[9px] tracking-[0.2em] uppercase"
             style={{ fontFamily: "'DM Mono', monospace", color: '#FAFAF820' }}
           >
-            Product designer, artist, writer & builder
+            Product designer & builder
           </div>
         </div>
         <button

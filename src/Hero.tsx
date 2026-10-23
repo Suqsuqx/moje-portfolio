@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 import { PANELS, BALL_CENTERS } from './App'
 
-const HERO_TITLES = [
-  <>Product designer, artist,<br />writer&nbsp;&amp;&nbsp;builder.</>,
-  <>d!gitaL design at the inter/section<br />of art, language&nbsp;&amp;&nbsp;strategy.</>,
-]
-
 // ─── PANEL BLOCK ─────────────────────────────────────────────────────────────
 
 function PanelBlock({
@@ -35,6 +30,12 @@ function PanelBlock({
         transform: hovered ? 'translateY(-10px)' : 'translateY(0)',
         transition: 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       }}
+      role="button"
+      tabIndex={disabled ? -1 : 0}
+      aria-label={panel.label}
+      onKeyDown={(event) => { if (!disabled && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); onClick() } }}
+      onFocus={onHover}
+      onBlur={onLeave}
       onMouseEnter={() => { if (!disabled) onHover() }}
       onMouseLeave={onLeave}
       onClick={() => { if (!disabled) onClick() }}
@@ -64,7 +65,7 @@ function PanelBlock({
           className="mt-2 text-[9px] tracking-[0.18em] uppercase opacity-70 font-medium"
           style={{ fontFamily: "'DM Mono', monospace" }}
         >
-          SELECT →
+          ↗
         </div>
       </div>
 
@@ -97,7 +98,6 @@ export default function Hero({
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
   const [mobileScrollIdx, setMobileScrollIdx] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
-  const [titleIdx, setTitleIdx] = useState(0)
 
   useEffect(() => {
     if (visible) {
@@ -106,12 +106,6 @@ export default function Hero({
     } else {
       setMounted(false)
     }
-  }, [visible])
-
-  useEffect(() => {
-    if (!visible) return
-    const timer = window.setInterval(() => setTitleIdx((current) => (current + 1) % HERO_TITLES.length), 5200)
-    return () => window.clearInterval(timer)
   }, [visible])
 
   useEffect(() => {
@@ -161,23 +155,15 @@ export default function Hero({
       {/* ── Top: name + rotating practice statement ────────────── */}
       <div className="hero-topline flex-none flex items-center justify-between px-4 sm:px-8 md:px-12">
         <strong className="text-sm tracking-tight">MOJE IKPEME</strong>
-        <span
-          className="text-[9px] tracking-[0.28em] uppercase"
-          style={{ fontFamily: "'DM Mono', monospace", color: '#FAFAF875' }}
-        >
-          SELECTED WORK · 2026
-        </span>
+        <nav className="portfolio-links" aria-label="Main navigation">
+          <a href="#cv">CV</a>
+          <a href="mailto:mojeikpeme@gmail.com">CONTACT ↗</a>
+        </nav>
       </div>
 
       <div className="hero-intro flex-1 flex items-end justify-between gap-8 px-4 sm:px-8 md:px-12">
         <div className={`hero-statement-wrap ${mounted ? 'anim-fadeinup' : ''}`} style={{ animationDelay: '0.1s' }}>
-          <h1
-            key={titleIdx}
-            className={`hero-statement ${titleIdx === 1 ? 'hero-statement--alternate' : ''}`}
-            aria-live="polite"
-          >
-            {HERO_TITLES[titleIdx]}
-          </h1>
+          <h1 className="hero-statement">I make complex<br />products feel simple.</h1>
         </div>
 
         <div
@@ -185,12 +171,12 @@ export default function Hero({
           style={{ animationDelay: '0.25s' }}
         >
           <div className="hero-bio">
-            <p>
-              I’m a product designer and builder with experience creating digital products across fintech, payments, commerce, and emerging technology. I work across product strategy, UX, systems thinking, and visual design, helping turn complex or early-stage ideas into clear, useful products that can move from concept to launch.
-            </p>
-            <p>
-              My experience spans startups, growth teams, and financial services, where I’ve worked on products from research and problem definition through design, prototyping, launch, and iteration. I’m particularly interested in ambitious products with difficult problems, where design is not just about interfaces, but about shaping how the product works, how people understand it, and how the business creates value.
-            </p>
+            <p>I’m Moje, a product designer and builder with six years across fintech, payments and commerce. I turn difficult product problems into clear journeys, useful interfaces and systems teams can ship.</p>
+            <p>From design and growth at Sterling Bank to building Stipendly, I connect how a product works with how people understand and use it. Art direction and writing shape the craft behind the work.</p>
+            <div className="portfolio-links hero-actions">
+              <button type="button" onClick={() => onSelect(0)} disabled={transitioning}>VIEW PRODUCT WORK ↗</button>
+              <a href="mailto:mojeikpeme@gmail.com?subject=Design%20opportunity">LET’S TALK ↗</a>
+            </div>
           </div>
 
           <div className="hero-active-discipline text-right">
